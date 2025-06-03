@@ -13,14 +13,19 @@ const PORT = process.env.PORT || 3000;
 // A pasta 'public' é onde colocaremos todos os arquivos do frontend.
 app.use(express.static('public'));
 
+
+
 // 5. Definir uma rota para a página inicial (Landing Page)
-// Quando alguém acessa a raiz do seu site (ex: http://localhost:3000/),
-// o servidor vai enviar o arquivo 'index.html' que estará dentro da pasta 'public'.
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-// 6. Iniciar o servidor
+// 6. Definir uma rota para a página 'Sobre Nós'
+app.get('/sobre', (req, res) => {
+    res.sendFile(__dirname + '/public/sobre.html');
+});
+
+// 7. Iniciar o servidor (o número do passo mudou porque adicionamos um acima)
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
     console.log('Pressione Ctrl+C para parar o servidor');

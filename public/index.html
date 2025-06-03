@@ -1,95 +1,382 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaIA - Agência de IA</title>
-    <style>
-        /* Estilos básicos para o layout */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-            text-align: center;
-        }
-        header {
-            background-color: #28a745; /* Um verde bacana */
-            color: white;
-            padding: 1em 0;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            background-color: #333;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            padding: 15px 20px;
-            display: block;
-        }
-        nav ul li a:hover {
-            background-color: #555;
-        }
-        .hero {
-            padding: 50px 20px;
-            background-color: #e2f0d9;
-            margin-bottom: 20px;
-        }
-        .content {
-            padding: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 1em 0;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>MaIA - Sua Agência de Inteligência Artificial</h1>
-        <p>Soluções inteligentes para o seu negócio.</p>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MaIA - Soluções em Inteligência Artificial</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="images/favicon.png" type="image/x-icon" />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+
+    <header class="header">
+      <nav class="navbar container">
+        <div class="navbar-left">
+          <a href="#home" class="logo">
+            <img
+              src="images/logo.png"
+              alt="Logo MaIA"
+              class="logo-img-header"
+            />
+          </a>
+        </div>
+
+        <ul class="nav-list1 flex flex-col md:flex-row md:space-x-4">
+         <li class="nav-item">
+           <a href="#home" class="nav-link active">Home</a>
+         </li>
+         <li class="nav-item">
+           <a href="#about-us" class="nav-link">Sobre Nós</a>
+         </li>
+         <li class="nav-item">
+           <a href="#services" class="nav-link">Serviços</a>
+         </li>
+         <li class="nav-item">
+           <a href="#contact" class="nav-link">Contato</a>
+         </li>
+       </ul>
+        <button
+          class="nav-toggle"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+        >
+          <span class="hamburger-icon"></span>
+        </button>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#home" class="nav-link active">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#about-us" class="nav-link">Sobre Nós</a>
+          </li>
+          <li class="nav-item">
+            <a href="#services" class="nav-link">Serviços</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link">Contato</a>
+          </li>
+          <li class="nav-item mobile-only-item">
+            <a href="#contact" class="btn btn-agendar-mobile"
+              >Agendar diagnóstico <span class="arrow-icon">➔</span></a
+            >
+          </li>
+          <li class="nav-item mobile-only-item social-icons-mobile">
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              title="Instagram"
+            >
+              <img src="images/instagram.png" alt="Instagram" />
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X (Twitter)"
+              title="X (Twitter)"
+            >
+              <img src="images/X.png" alt="X" />
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              title="LinkedIn"
+            >
+              <img src="images/email.png" alt="Email" />
+            </a>
+          </li>
+        </ul>
+
+        <div class="navbar-right">
+          <div class="social-icons-header">
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              title="Instagram"
+            >
+              <img src="images/instagram.png" alt="Instagram" />
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X (Twitter)"
+              title="X (Twitter)"
+            >
+              <img src="images/X.png" alt="X" />
+            </a>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              title="LinkedIn"
+            >
+              <img src="images/email.png" alt="Email" />
+            </a>
+          </div>
+          <a href="#contact" class="btn btn-agendar">Agendar diagnóstico</a>
+        </div>
+      </nav>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/sobre">Sobre Nós</a></li>
-            <li><a href="/agentes">Testar Agentes</a></li>
-        </ul>
-    </nav>
-
     <main>
-        <section class="hero">
-            <h2>Transforme seu negócio com o poder da IA!</h2>
-            <p>Desenvolvemos agentes inteligentes personalizados para otimizar suas operações e impulsionar seus resultados.</p>
-            <button onclick="location.href='/agentes'">Conheça Nossos Agentes</button>
-        </section>
+      <section id="home" class="hero container">
+        <div class="hero-content">
+          <!-- Nova tag "AGÊNCIA DE IA" adicionada aqui -->
+          <span class="hero-tag-accent">AGÊNCIA DE IA</span>
 
-        <section class="content">
-            <h3>Nossas Soluções</h3>
-            <p>Desde automação de processos a análises preditivas, nossos agentes de IA são projetados para oferecer inovação e eficiência.</p>
-            <p>Explore como podemos ajudar sua empresa a alcançar novos patamares de produtividade e inteligência.</p>
-        </section>
+          <h1>
+            Transformando<br />Ideias com<br /><span class="highlight"
+              >Inteligência Artificial</span
+            >
+          </h1>
+
+          <!-- Container para a imagem tags.svg -->
+          <div class="hero-tags-container">
+            <img src="images/tags.svg" alt="Tags MaIA" class="tags-img" />
+          </div>
+
+          <p>
+            Desbloqueie mais produtividade e veja sua empresa crescer mais
+            rápido. Nosso time implementa inteligência artificial nos setores
+            estratégicos do seu negócio.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary"
+              >Agendar Diagnóstico <span class="arrow-icon">➔</span></a
+            >
+          </div>
+          <a class="hero-sub-link">Quero uma equipe com <b>agentes de IA</b></a>
+        </div>
+      </section>
+
+      <section id="contact" class="contact container">
+        <div class="contact-wrapper">
+          <div class="contact-info">
+            <h2>Faça seu projeto personalizado</h2>
+            <p>
+              Estamos prontos para ajudar a transformar sua visão em realidade.
+              Entre em contato e descubra como a IA pode impulsionar o seu
+              negócio.
+            </p>
+            <ul>
+              <li>
+                <div class="info-icon">
+                  <img
+                    width="26"
+                    height="26"
+                    src="images/email.png"
+                    alt="email"
+                  />
+                </div>
+                <div>
+                  <strong>Email</strong>
+                  <p>contato@maiainteligencia.com.br</p>
+                </div>
+              </li>
+              <li>
+                <div class="info-icon">
+                  <img
+                    width="26"
+                    height="26"
+                    src="images/telefone.png"
+                    alt="telefone"
+                  />
+                </div>
+                <div>
+                  <strong>Telefone</strong>
+                  <p>+55 (41) 98705-7817</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="contact-form">
+            <form action="#" method="POST">
+              <div class="form-group">
+                <label for="name">Nome</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Seu nome"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="seu@email.com"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="whatsapp">WhatsApp</label>
+                <input
+                  type="tel"
+                  id="whatsapp"
+                  name="whatsapp"
+                  placeholder="Ex: (XX) XXXXX-XXXX"
+                  pattern="[0-9]{10,15}"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="message">Mensagem</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  placeholder="Como podemos ajudar?"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Enviar Mensagem <span class="arrow-icon">➔</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" class="services container">
+        <!-- Conteúdo da seção de serviços virá aqui -->
+      </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 MaIA - Todos os direitos reservados.</p>
-    </footer>
-</body>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module">
+      // Função showToast (se não estiver em script.js ou global)
+      function showToast(message, type = "info") {
+        const container = document.getElementById("toast-container");
+        if (!container) {
+          console.warn("Toast container not found.");
+          return;
+        }
+
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.opacity = "0";
+          setTimeout(() => {
+            if (toast.parentNode === container) {
+              // Verifica se o toast ainda está no container
+              container.removeChild(toast);
+            }
+          }, 500);
+        }, 5500);
+      }
+
+      // Código do formulário Supabase
+      const supabaseUrl = "https://ojblhyflwcsckteiypje.supabase.co";
+      const supabaseKey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qYmxoeWZsd2NzY2t0ZWl5cGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NTg4NjEsImV4cCI6MjA2MTAzNDg2MX0.-WSO_IgaXW81u8aqtJbRiLky40rFGpgAsRwArAcIU4M";
+      const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+
+      const form = document.querySelector(".contact-form form");
+
+      if (form) {
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const name = form.name.value.trim();
+          const email = form.email.value.trim();
+          const whatsapp = form.whatsapp?.value?.trim() || "";
+          const message = form.message.value.trim();
+
+          if (!name || !email || !message) {
+            if (typeof showToast === "function")
+              showToast(
+                "Por favor, preencha todos os campos obrigatórios.",
+                "error"
+              );
+            else console.error("Função showToast não definida.");
+            return;
+          }
+          if (whatsapp && !/^[0-9]{10,15}$/.test(whatsapp)) {
+            if (typeof showToast === "function")
+              showToast(
+                "Por favor, insira um número de WhatsApp válido.",
+                "error"
+              );
+            else console.error("Função showToast não definida.");
+            return;
+          }
+
+          try {
+            const { data, error } = await supabaseClient
+              .from("contatos")
+              .insert([{ name, email, whatsapp, message, processado: false }]);
+
+            if (error) {
+              const errorMessage =
+                error.message ||
+                "Ocorreu um erro ao enviar sua mensagem. Tente novamente.";
+              if (typeof showToast === "function")
+                showToast("Erro ao enviar: " + errorMessage, "error");
+              else console.error("Erro ao enviar: " + errorMessage);
+              console.error("Erro do Supabase:", error);
+            } else {
+              if (typeof showToast === "function")
+                showToast(
+                  "Mensagem enviada com sucesso! Em breve entraremos em contato.",
+                  "success"
+                );
+              else console.log("Mensagem enviada com sucesso!");
+              form.reset();
+            }
+          } catch (submitError) {
+            if (typeof showToast === "function")
+              showToast(
+                "Ocorreu um erro inesperado. Verifique sua conexão.",
+                "error"
+              );
+            else
+              console.error(
+                "Ocorreu um erro inesperado. Verifique sua conexão."
+              );
+            console.error("Erro no envio do formulário:", submitError);
+          }
+        });
+      }
+    </script>
+    <script type="text/javascript">
+      (function (d, t) {
+        var v = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+        v.onload = function () {
+          window.voiceflow.chat.load({
+            verify: { projectID: "683e2e02abe040bae5727b07" },
+            url: "https://general-runtime.voiceflow.com",
+            versionID: "production",
+            voice: {
+              url: "https://runtime-api.voiceflow.com",
+            },
+          });
+        };
+        v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+        v.type = "text/javascript";
+        s.parentNode.insertBefore(v, s);
+      })(document, "script");
+    </script>
+    <div id="toast-container"></div>
+  </body>
 </html>
