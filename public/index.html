@@ -453,223 +453,259 @@
       </section>
     </main>
 
-      <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
-    <script type="module">
-      // Função showToast (existente)
-      function showToast(message, type = "info") {
-        const container = document.getElementById("toast-container");
-        if (!container) {
-          console.warn("Toast container não encontrado.");
-          return;
-        }
-        const toast = document.createElement("div");
-        toast.className = `toast ${type}`;
-        toast.textContent = message;
-        container.appendChild(toast);
-        setTimeout(() => {
-          if (toast.parentNode === container) {
-            container.removeChild(toast);
-          }
-        }, 6000);
+   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script type="module">
+  // Função showToast (existente)
+  function showToast(message, type = "info") {
+    const container = document.getElementById("toast-container");
+    if (!container) {
+      console.warn("Toast container não encontrado.");
+      return;
+    }
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.textContent = message;
+    container.appendChild(toast);
+    setTimeout(() => {
+      if (toast.parentNode === container) {
+        container.removeChild(toast);
       }
+    }, 6000);
+  }
 
-      // Código do formulário Supabase (existente)
-      const supabaseUrl = "https://ojblhyflwcsckteiypje.supabase.co";
-      const supabaseKey =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qYmxoeWZsd2NzY2t0ZWl5cGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NTg4NjEsImexZCI6MjA2MTAzNDg2MX0.-WSO_IgaXW81u8aqtJbRiLky40rFGpgAsRwArAcIU4M";
-      const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-      const form = document.querySelector(".contact-form form");
-      if (form) {
-        form.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const name = form.name.value.trim();
-          const email = form.email.value.trim();
-          const whatsapp = form.whatsapp?.value?.trim() || "";
-          const message = form.message.value.trim();
-          if (!name || !email || !message) {
-            if (typeof showToast === "function") showToast("Por favor, preencha todos os campos obrigatórios.", "error");
-            else console.error("Função showToast não definida.");
-            return;
-          }
-          if (whatsapp && !/^[0-9]{10,15}$/.test(whatsapp)) {
-            if (typeof showToast === "function") showToast("Por favor, insira um número de WhatsApp válido.", "error");
-            else console.error("Função showToast não definida.");
-            return;
-          }
-          try {
-            const { error } = await supabaseClient
-              .from("contatos")
-              .insert([{ name, email, whatsapp, message, processado: false }]);
-            if (error) {
-              const errorMessage = error.message || "Ocorreu um erro ao enviar sua mensagem. Tente novamente.";
-              if (typeof showToast === "function") showToast("Erro ao enviar: " + errorMessage, "error");
-              else console.error("Erro ao enviar: " + errorMessage);
-            } else {
-              if (typeof showToast === "function") showToast("Mensagem enviada com sucesso! Em breve entraremos em contato.", "success");
-              else console.log("Mensagem enviada com sucesso!");
-              form.reset();
-            }
-          } catch (submitError) {
-            if (typeof showToast === "function") showToast("Ocorreu um erro inesperado. Verifique sua conexão.", "error");
-            else console.error("Ocorreu um erro inesperado. Verifique sua conexão.");
-          }
-        });
+  // Código do formulário Supabase (existente)
+  const supabaseUrl = "https://ojblhyflwcsckteiypje.supabase.co";
+  const supabaseKey =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qYmxoeWZsd2NzY2t0ZWl5cGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NTg4NjEsImexZCI6MjA2MTAzNDg2MX0.-WSO_IgaXW81u8aqtJbRiLky40rFGpgAsRwArAcIU4M";
+  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+  const form = document.querySelector(".contact-form form");
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const whatsapp = form.whatsapp?.value?.trim() || "";
+      const message = form.message.value.trim();
+      if (!name || !email || !message) {
+        if (typeof showToast === "function") showToast("Por favor, preencha todos os campos obrigatórios.", "error");
+        else console.error("Função showToast não definida.");
+        return;
       }
-
-      // --- LÓGICA DO CHATBOT EMBUTIDO ---
-      // Elementos do DOM para o chat embutido
-      const chatMessagesContainer = document.getElementById('chatMessages'); // Continua sendo o container das mensagens
-      const chatInput = document.getElementById('chatInput'); // Continua sendo o input
-      const sendChatBtn = document.getElementById('sendChatBtn'); // Continua sendo o botão de enviar
-      
-      let chatHistory = []; 
-
-      // ATENÇÃO: Substitua esta URL pelo seu Webhook URL do n8n
-      const N8N_WEBHOOK_URL = "https://n8n.maia-ia.sbs/webhook-test/8449b14a-b5eb-4aeb-a09c-96d95f18dd52"; 
-
-      // Função para adicionar mensagem à UI do chat
-      function addMessageToChat(text, sender) {
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message', sender);
-        
-        if (sender === 'bot') {
-            const botAvatar = document.createElement('div');
-            botAvatar.classList.add('bot-avatar');
-            botAvatar.textContent = 'IA';
-
-            const messageTextDiv = document.createElement('div');
-            messageTextDiv.classList.add('message-text');
-            messageTextDiv.textContent = text;
-            
-            const messageContentDiv = document.createElement('div');
-            messageContentDiv.classList.add('message-content');
-            messageContentDiv.appendChild(botAvatar);
-            messageContentDiv.appendChild(messageTextDiv);
-            messageDiv.appendChild(messageContentDiv);
-        } else { // User message
-            messageDiv.textContent = text;
-        }
-        
-        chatMessagesContainer.appendChild(messageDiv);
-        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+      if (whatsapp && !/^[0-9]{10,15}$/.test(whatsapp)) {
+        if (typeof showToast === "function") showToast("Por favor, insira um número de WhatsApp válido.", "error");
+        else console.error("Função showToast não definida.");
+        return;
       }
-
-      function addUserMessage(text) {
-        addMessageToChat(text, 'user');
-        chatHistory.push({ role: "user", parts: [{ text: text }] });
+      try {
+        const { error } = await supabaseClient
+          .from("contatos")
+          .insert([{ name, email, whatsapp, message, processado: false }]);
+        if (error) {
+          const errorMessage = error.message || "Ocorreu um erro ao enviar sua mensagem. Tente novamente.";
+          if (typeof showToast === "function") showToast("Erro ao enviar: " + errorMessage, "error");
+          else console.error("Erro ao enviar: " + errorMessage);
+        } else {
+          if (typeof showToast === "function") showToast("Mensagem enviada com sucesso! Em breve entraremos em contato.", "success");
+          else console.log("Mensagem enviada com sucesso!");
+          form.reset();
+        }
+      } catch (submitError) {
+        if (typeof showToast === "function") showToast("Ocorreu um erro inesperado. Verifique sua conexão.", "error");
+        else console.error("Ocorreu um erro inesperado. Verifique sua conexão.");
       }
+    });
+  }
 
-      function addBotMessage(text) {
-        addMessageToChat(text, 'bot');
-        chatHistory.push({ role: "model", parts: [{ text: text }] });
-      }
-      
-      let typingIndicator = null;
-      function showTypingIndicator() {
-        if (!typingIndicator && chatMessagesContainer) { // Adicionado cheque para chatMessagesContainer
-            typingIndicator = document.createElement('div');
-            typingIndicator.classList.add('message', 'bot', 'typing-indicator');
-            
-            const botAvatar = document.createElement('div');
-            botAvatar.classList.add('bot-avatar');
-            botAvatar.textContent = 'IA';
+  // --- LÓGICA DO CHATBOT EMBUTIDO ---
+  // Elementos do DOM para o chat embutido
+  const chatMessagesContainer = document.getElementById('chatMessages');
+  const chatInput = document.getElementById('chatInput');
+  const sendChatBtn = document.getElementById('sendChatBtn');
 
-            const messageTextDiv = document.createElement('div');
-            messageTextDiv.classList.add('message-text');
-            messageTextDiv.textContent = "MaIA está digitando...";
-            
-            const messageContentDiv = document.createElement('div');
-            messageContentDiv.classList.add('message-content');
-            messageContentDiv.appendChild(botAvatar);
-            messageContentDiv.appendChild(messageTextDiv);
-            typingIndicator.appendChild(messageContentDiv);
+  let chatHistory = [];
 
-            chatMessagesContainer.appendChild(typingIndicator);
-            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-        }
-      }
+  // ATENÇÃO: Substitua esta URL pelo seu Webhook URL do n8n
+  const N8N_WEBHOOK_URL = "https://n8n.maia-ia.sbs/webhook-test/8449b14a-b5eb-4aeb-a09c-96d95f18dd52";
 
-      function removeTypingIndicator() {
-        if (typingIndicator && chatMessagesContainer && typingIndicator.parentNode === chatMessagesContainer) { // Adicionado cheque para chatMessagesContainer e parentNode
-            chatMessagesContainer.removeChild(typingIndicator);
-            typingIndicator = null;
-        }
-      }
+  // Lógica para gerar e gerenciar o Session ID
+  const SESSION_ID_KEY = 'maiaChatSessionId';
+  let currentSessionId = localStorage.getItem(SESSION_ID_KEY);
 
-      async function getBotResponse(userMessage) {
-        showTypingIndicator();
-        // Envia o histórico completo para o n8n para que ele possa gerenciar o contexto
-        const payload = {
-          chatHistory: chatHistory,
-          userMessage: userMessage // Opcional, pode ser extraído do chatHistory no n8n
-        };
+  // Se não houver um ID de sessão, gere um novo
+  if (!currentSessionId) {
+    // Usando crypto.randomUUID() para gerar um UUID robusto em navegadores modernos
+    // Fallback para uma função simples se crypto.randomUUID não for suportado
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+      currentSessionId = crypto.randomUUID();
+    } else {
+      // Fallback simples para compatibilidade com navegadores mais antigos
+      currentSessionId = 'sess_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+    }
+    localStorage.setItem(SESSION_ID_KEY, currentSessionId);
+    console.log("Novo ID de sessão gerado:", currentSessionId);
+  } else {
+    console.log("ID de sessão existente:", currentSessionId);
+  }
 
-        try {
-          const response = await fetch(N8N_WEBHOOK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
+  // Função para adicionar mensagem à UI do chat
+  function addMessageToChat(text, sender) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', sender);
 
-          if (!response.ok) {
-            const errorData = await response.json();
-            console.error('Erro do Webhook n8n:', errorData);
-            throw new Error(`Webhook Error: ${response.status} ${response.statusText}`);
-          }
+    if (sender === 'bot') {
+      const botAvatar = document.createElement('div');
+      botAvatar.classList.add('bot-avatar');
+      botAvatar.textContent = 'IA';
 
-          const result = await response.json();
-          removeTypingIndicator();
+      const messageTextDiv = document.createElement('div');
+      messageTextDiv.classList.add('message-text');
+      messageTextDiv.textContent = text;
 
-          // Esperamos que o n8n retorne um objeto com uma propriedade 'response' contendo o texto do bot
-          if (result && result.response) {
-            const botText = result.response;
-            addBotMessage(botText);
-          } else {
-            console.error('Resposta inesperada do n8n:', result);
-            addBotMessage("Desculpe, não consegui processar sua mensagem no momento.");
-          }
-        } catch (error) {
-          removeTypingIndicator();
-          console.error('Erro ao buscar resposta do bot via n8n:', error);
-          addBotMessage("Ops! Algo deu errado. Tente novamente mais tarde.");
-        }
-      }
+      const messageContentDiv = document.createElement('div');
+      messageContentDiv.classList.add('message-content');
+      messageContentDiv.appendChild(botAvatar);
+      messageContentDiv.appendChild(messageTextDiv);
+      messageDiv.appendChild(messageContentDiv);
+    } else { // User message
+      messageDiv.textContent = text;
+    }
 
-      async function handleSendMessage() {
-        if (!chatInput) return; // Cheque se chatInput existe
-        const messageText = chatInput.value.trim();
-        if (messageText) {
-          addUserMessage(messageText);
-          chatInput.value = '';
-          await getBotResponse(messageText);
-        }
-      }
-      
-      // Inicialização do Chat quando o DOM estiver pronto
-      document.addEventListener('DOMContentLoaded', () => {
-        if (chatMessagesContainer && chatMessagesContainer.children.length === 0) {
-            addBotMessage("Olá! Sou a MaIA, sua assistente virtual. Como posso te ajudar hoje?");
-        }
-        if (chatInput) { // Foca no input quando a página carrega
-            chatInput.focus();
-        }
+    chatMessagesContainer.appendChild(messageDiv);
+    chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+  }
 
-        if (sendChatBtn) {
-            sendChatBtn.addEventListener('click', handleSendMessage);
-        }
-        if (chatInput) {
-            chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleSendMessage();
-            }
-            });
-        }
+  function addUserMessage(text) {
+    addMessageToChat(text, 'user');
+    chatHistory.push({
+      role: "user",
+      parts: [{
+        text: text
+      }]
+    });
+    // Não é necessário salvar o histórico no localStorage aqui se o n8n for responsável pela persistência
+  }
+
+  function addBotMessage(text) {
+    addMessageToChat(text, 'bot');
+    chatHistory.push({
+      role: "model",
+      parts: [{
+        text: text
+      }]
+    });
+    // Não é necessário salvar o histórico no localStorage aqui se o n8n for responsável pela persistência
+  }
+
+  let typingIndicator = null;
+
+  function showTypingIndicator() {
+    if (!typingIndicator && chatMessagesContainer) {
+      typingIndicator = document.createElement('div');
+      typingIndicator.classList.add('message', 'bot', 'typing-indicator');
+
+      const botAvatar = document.createElement('div');
+      botAvatar.classList.add('bot-avatar');
+      botAvatar.textContent = 'IA';
+
+      const messageTextDiv = document.createElement('div');
+      messageTextDiv.classList.add('message-text');
+      messageTextDiv.textContent = "MaIA está digitando...";
+
+      const messageContentDiv = document.createElement('div');
+      messageContentDiv.classList.add('message-content');
+      messageContentDiv.appendChild(botAvatar);
+      messageContentDiv.appendChild(messageTextDiv);
+      typingIndicator.appendChild(messageContentDiv);
+
+      chatMessagesContainer.appendChild(typingIndicator);
+      chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+    }
+  }
+
+  function removeTypingIndicator() {
+    if (typingIndicator && chatMessagesContainer && typingIndicator.parentNode === chatMessagesContainer) {
+      chatMessagesContainer.removeChild(typingIndicator);
+      typingIndicator = null;
+    }
+  }
+
+  async function getBotResponse(userMessage) {
+    showTypingIndicator();
+    // Envia o histórico completo E o Session ID para o n8n
+    const payload = {
+      userMessage: userMessage,
+      sessionId: currentSessionId // <-- Agora o ID da sessão está incluído!
+    };
+
+    try {
+      const response = await fetch(N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
       });
 
-    </script>
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Erro do Webhook n8n:', errorData);
+        throw new Error(`Webhook Error: ${response.status} ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      removeTypingIndicator();
+
+      if (result && result.response) {
+        const botText = result.response;
+        addBotMessage(botText);
+      } else {
+        console.error('Resposta inesperada do n8n:', result);
+        addBotMessage("Desculpe, não consegui processar sua mensagem no momento.");
+      }
+    } catch (error) {
+      removeTypingIndicator();
+      console.error('Erro ao buscar resposta do bot via n8n:', error);
+      addBotMessage("Ops! Algo deu errado. Tente novamente mais tarde.");
+    }
+  }
+
+  async function handleSendMessage() {
+    if (!chatInput) return;
+    const messageText = chatInput.value.trim();
+    if (messageText) {
+      addUserMessage(messageText);
+      chatInput.value = '';
+      await getBotResponse(messageText);
+    }
+  }
+
+  // Inicialização do Chat quando o DOM estiver pronto
+  document.addEventListener('DOMContentLoaded', () => {
+    // Se você estiver gerenciando o histórico no n8n, o chatHistory local
+    // pode começar vazio e apenas a mensagem inicial será exibida.
+    // O n8n usará o sessionId para carregar o histórico persistido.
+    if (chatMessagesContainer && chatMessagesContainer.children.length === 0) {
+      addBotMessage("Olá! Sou a MaIA, sua assistente virtual. Como posso te ajudar hoje?");
+    }
+    if (chatInput) {
+      chatInput.focus();
+    }
+
+    if (sendChatBtn) {
+      sendChatBtn.addEventListener('click', handleSendMessage);
+    }
+    if (chatInput) {
+      chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          handleSendMessage();
+        }
+      });
+    }
+  });
+</script>
     <div id="toast-container"></div>
   </body>
 </html>
