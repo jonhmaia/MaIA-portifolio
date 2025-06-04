@@ -7,6 +7,176 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" href="images/favicon.png" type="image/x-icon" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Estilos customizados para o Chatbot como Seção */
+      .inline-chat-ui {
+        width: 100%;
+        max-width: 700px; /* Largura máxima para a interface do chat na seção */
+        height: 550px;    /* Altura fixa para a área de chat */
+         background: linear-gradient(
+    145deg,
+    rgba(var(--accent-color-rgb), 0.05),
+    rgba(var(--card-bg-color), 0.5)
+  );
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        margin: 0 auto; /* Centraliza o chat se a largura máxima for atingida */
+      }
+
+      .chat-header {
+        padding: 15px;
+        display: flex;
+        justify-content: center; /* Alterado para space-between caso queira adicionar algo à direita */
+        align-items: center;
+        border-bottom: 1px solid #293969;
+      }
+
+      .chat-header-title {
+        color: #e0e0e0;
+        font-size: 1.1rem;
+        font-weight: 600;
+      }
+      
+     .chat-header-logo {
+        height: 30px; /* Altura definida para a logo */
+        width: auto;  /* Largura automática para manter a proporção */
+        object-fit: contain; /* Garante que a imagem caiba sem distorção */
+        margin-right: 12px; /* Espaçamento entre a logo e o título */
+        flex-shrink: 0; /* Impede que a logo encolha se o título for longo */
+      }
+
+      /* O botão de fechar não é mais necessário para o chat embutido */
+      /* .chat-close-btn ... */
+
+      .chat-messages {
+        flex-grow: 1;
+        padding: 15px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        scrollbar-width: thin;
+        scrollbar-color: #4f4f4f #1e1e1e;
+      }
+      .chat-messages::-webkit-scrollbar {
+        width: 8px;
+      }
+      .chat-messages::-webkit-scrollbar-track {
+        background: #293969;
+        border-radius: 10px;
+      }
+      .chat-messages::-webkit-scrollbar-thumb {
+        background-color: #4f4f4f;
+        border-radius: 10px;
+        border: 2px solid #1e1e1e;
+      }
+
+      .message {
+        padding: 10px 15px;
+        border-radius: 18px;
+        max-width: 80%;
+        line-height: 1.4;
+        color: #e0e0e0;
+      }
+
+      .message.user {
+        background-color: #293969;
+        align-self: flex-end;
+        border-bottom-right-radius: 5px;
+        color: #fff;
+      }
+
+      .message.bot {
+  
+        background-color:#0b0f1b ;
+        align-self: flex-start;
+        border-bottom-left-radius: 5px;
+      }
+      
+      .message.bot .bot-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+        background-color: #00c49a;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #1e1e1e;
+        font-size: 0.8rem;
+        flex-shrink: 0;
+      }
+
+      .message-content {
+        display: flex;
+        align-items: flex-start;
+      }
+      
+      .message-text {
+         word-wrap: break-word;
+      }
+
+      .message.typing-indicator { /* Estilo para o indicador de "digitando" */
+        color: #aaa;
+        font-style: italic;
+        padding: 5px 15px;
+        align-self: flex-start;
+      }
+
+      .chat-input-area {
+        display: flex;
+        padding: 12px 15px;
+       
+      }
+
+      .chat-input {
+        flex-grow: 1;
+        padding: 10px 15px;
+        border: 1px solid #293969;
+        border-radius: 20px;
+        background: linear-gradient(
+    145deg,
+    rgba(var(--accent-color-rgb), 0.05),
+    rgba(var(--card-bg-color), 0.5)
+  );
+        color: #e0e0e0;
+        font-size: 0.95rem;
+        margin-right: 10px;
+        outline: none;
+      }
+      .chat-input:focus {
+        border-color: var(--accent-color);
+      }
+
+      .send-btn {
+        background-color: var(--accent-color);
+        color: #181818;
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.3rem;
+        transition: background-color 0.2s;
+      }
+      .send-btn:hover {
+        background-color: var(--accent-color-darker);
+      }
+
+      .chat-footer {
+        padding: 8px 15px;
+        text-align: center;
+        font-size: 0.75rem;
+        color: #888;
+      }
+    </style>
   </head>
   <body>
     <div id="particles-js"></div>
@@ -34,6 +204,9 @@
            <a href="#services" class="nav-link">Serviços</a>
          </li>
          <li class="nav-item">
+           <a href="#chatbot-section-nav" class="nav-link">Chatbot</a>
+         </li>
+         <li class="nav-item">
            <a href="#contact" class="nav-link">Contato</a>
          </li>
        </ul>
@@ -53,6 +226,9 @@
           </li>
           <li class="nav-item">
             <a href="#services" class="nav-link">Serviços</a>
+          </li>
+          <li class="nav-item">
+            <a href="#chatbot-section-nav" class="nav-link">Chatbot</a>
           </li>
           <li class="nav-item">
             <a href="#contact" class="nav-link">Contato</a>
@@ -131,26 +307,20 @@
     <main>
       <section id="home" class="hero container">
         <div class="hero-content">
-          <!-- Nova tag "AGÊNCIA DE IA" adicionada aqui -->
           <span class="hero-tag-accent">AGÊNCIA DE IA</span>
-
           <h1>
             Transformando<br />Ideias com<br /><span class="highlight"
               >Inteligência Artificial</span
             >
           </h1>
-
-          <!-- Container para a imagem tags.svg -->
           <div class="hero-tags-container">
             <img src="images/tags.svg" alt="Tags MaIA" class="tags-img" />
           </div>
-
           <p>
             Desbloqueie mais produtividade e veja sua empresa crescer mais
             rápido. Nosso time implementa inteligência artificial nos setores
             estratégicos do seu negócio.
           </p>
-
           <div class="hero-buttons">
             <a href="#contact" class="btn btn-primary"
               >Agendar Diagnóstico <span class="arrow-icon">➔</span></a
@@ -160,6 +330,37 @@
         </div>
       </section>
 
+      <section id="services" class="services container">
+        <!-- Conteúdo da seção de serviços virá aqui -->
+      </section>
+
+      <!-- SEÇÃO CHATBOT MODIFICADA PARA CONTER A INTERFACE DO CHAT DIRETAMENTE -->
+      <section id="chatbot-section-nav" class="container mx-auto scroll-mt-20 py-12 md:py-16">
+        <!-- INTERFACE DO CHAT EMBUTIDA AQUI -->
+        <div id="inlineChatInterface" class="inline-chat-ui">
+          <div class="chat-header">
+            <!-- Você pode adicionar um logo aqui se desejar, ex: -->
+           <img src="images/chat.png" alt="MaIA Icon" class="chat-header-logo" />
+
+        
+          </div>
+          <div id="chatMessages" class="chat-messages">
+            <!-- Mensagens aparecerão aqui -->
+          </div>
+          <div class="chat-input-area">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Envie uma mensagem para MaIA..." />
+            <button id="sendChatBtn" class="send-btn" aria-label="Enviar mensagem">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-horizontal"><path d="m3 3 3 9-3 9 19-9Z"/><path d="M6 12h16"/></svg>
+            </button>
+          </div>
+          <div class="chat-footer">
+            O Agente de IA pode cometer erros. Considere verificar informações importantes.<br>
+            © 2025| Desenvolvido por MaIA
+          </div>
+        </div>
+      </section>
+      <!-- FIM DA SEÇÃO CHATBOT MODIFICADA -->
+  
       <section id="contact" class="contact container">
         <div class="contact-wrapper">
           <div class="contact-info">
@@ -250,132 +451,224 @@
           </div>
         </div>
       </section>
-
-      <section id="services" class="services container">
-        <!-- Conteúdo da seção de serviços virá aqui -->
-      </section>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <script type="module">
-      // Função showToast (se não estiver em script.js ou global)
+      // Função showToast (existente)
       function showToast(message, type = "info") {
         const container = document.getElementById("toast-container");
         if (!container) {
-          console.warn("Toast container not found.");
+          console.warn("Toast container não encontrado.");
           return;
         }
-
         const toast = document.createElement("div");
         toast.className = `toast ${type}`;
         toast.textContent = message;
-
         container.appendChild(toast);
-
         setTimeout(() => {
-          toast.style.opacity = "0";
-          setTimeout(() => {
-            if (toast.parentNode === container) {
-              // Verifica se o toast ainda está no container
-              container.removeChild(toast);
-            }
-          }, 500);
-        }, 5500);
+          if (toast.parentNode === container) {
+            container.removeChild(toast);
+          }
+        }, 6000);
       }
 
-      // Código do formulário Supabase
+      // Código do formulário Supabase (existente)
       const supabaseUrl = "https://ojblhyflwcsckteiypje.supabase.co";
       const supabaseKey =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qYmxoeWZsd2NzY2t0ZWl5cGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NTg4NjEsImV4cCI6MjA2MTAzNDg2MX0.-WSO_IgaXW81u8aqtJbRiLky40rFGpgAsRwArAcIU4M";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qYmxoeWZsd2NzY2t0ZWl5cGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NTg4NjEsImexZCI6MjA2MTAzNDg2MX0.-WSO_IgaXW81u8aqtJbRiLky40rFGpgAsRwArAcIU4M";
       const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-
       const form = document.querySelector(".contact-form form");
-
       if (form) {
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
-
           const name = form.name.value.trim();
           const email = form.email.value.trim();
           const whatsapp = form.whatsapp?.value?.trim() || "";
           const message = form.message.value.trim();
-
           if (!name || !email || !message) {
-            if (typeof showToast === "function")
-              showToast(
-                "Por favor, preencha todos os campos obrigatórios.",
-                "error"
-              );
+            if (typeof showToast === "function") showToast("Por favor, preencha todos os campos obrigatórios.", "error");
             else console.error("Função showToast não definida.");
             return;
           }
           if (whatsapp && !/^[0-9]{10,15}$/.test(whatsapp)) {
-            if (typeof showToast === "function")
-              showToast(
-                "Por favor, insira um número de WhatsApp válido.",
-                "error"
-              );
+            if (typeof showToast === "function") showToast("Por favor, insira um número de WhatsApp válido.", "error");
             else console.error("Função showToast não definida.");
             return;
           }
-
           try {
-            const { data, error } = await supabaseClient
+            const { error } = await supabaseClient
               .from("contatos")
               .insert([{ name, email, whatsapp, message, processado: false }]);
-
             if (error) {
-              const errorMessage =
-                error.message ||
-                "Ocorreu um erro ao enviar sua mensagem. Tente novamente.";
-              if (typeof showToast === "function")
-                showToast("Erro ao enviar: " + errorMessage, "error");
+              const errorMessage = error.message || "Ocorreu um erro ao enviar sua mensagem. Tente novamente.";
+              if (typeof showToast === "function") showToast("Erro ao enviar: " + errorMessage, "error");
               else console.error("Erro ao enviar: " + errorMessage);
-              console.error("Erro do Supabase:", error);
             } else {
-              if (typeof showToast === "function")
-                showToast(
-                  "Mensagem enviada com sucesso! Em breve entraremos em contato.",
-                  "success"
-                );
+              if (typeof showToast === "function") showToast("Mensagem enviada com sucesso! Em breve entraremos em contato.", "success");
               else console.log("Mensagem enviada com sucesso!");
               form.reset();
             }
           } catch (submitError) {
-            if (typeof showToast === "function")
-              showToast(
-                "Ocorreu um erro inesperado. Verifique sua conexão.",
-                "error"
-              );
-            else
-              console.error(
-                "Ocorreu um erro inesperado. Verifique sua conexão."
-              );
-            console.error("Erro no envio do formulário:", submitError);
+            if (typeof showToast === "function") showToast("Ocorreu um erro inesperado. Verifique sua conexão.", "error");
+            else console.error("Ocorreu um erro inesperado. Verifique sua conexão.");
           }
         });
       }
-    </script>
-    <script type="text/javascript">
-      (function (d, t) {
-        var v = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-        v.onload = function () {
-          window.voiceflow.chat.load({
-            verify: { projectID: "683e2e02abe040bae5727b07" },
-            url: "https://general-runtime.voiceflow.com",
-            versionID: "production",
-            voice: {
-              url: "https://runtime-api.voiceflow.com",
-            },
-          });
+
+      // --- LÓGICA DO CHATBOT EMBUTIDO ---
+      // Elementos do DOM para o chat embutido
+      const chatMessagesContainer = document.getElementById('chatMessages'); // Continua sendo o container das mensagens
+      const chatInput = document.getElementById('chatInput'); // Continua sendo o input
+      const sendChatBtn = document.getElementById('sendChatBtn'); // Continua sendo o botão de enviar
+      
+      let chatHistory = []; 
+
+      // ATENÇÃO: Substitua esta URL pelo seu Webhook URL do n8n
+      const N8N_WEBHOOK_URL = "https://n8n.maia-ia.sbs/webhook-test/8449b14a-b5eb-4aeb-a09c-96d95f18dd52"; 
+
+      // Função para adicionar mensagem à UI do chat
+      function addMessageToChat(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', sender);
+        
+        if (sender === 'bot') {
+            const botAvatar = document.createElement('div');
+            botAvatar.classList.add('bot-avatar');
+            botAvatar.textContent = 'IA';
+
+            const messageTextDiv = document.createElement('div');
+            messageTextDiv.classList.add('message-text');
+            messageTextDiv.textContent = text;
+            
+            const messageContentDiv = document.createElement('div');
+            messageContentDiv.classList.add('message-content');
+            messageContentDiv.appendChild(botAvatar);
+            messageContentDiv.appendChild(messageTextDiv);
+            messageDiv.appendChild(messageContentDiv);
+        } else { // User message
+            messageDiv.textContent = text;
+        }
+        
+        chatMessagesContainer.appendChild(messageDiv);
+        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+      }
+
+      function addUserMessage(text) {
+        addMessageToChat(text, 'user');
+        chatHistory.push({ role: "user", parts: [{ text: text }] });
+      }
+
+      function addBotMessage(text) {
+        addMessageToChat(text, 'bot');
+        chatHistory.push({ role: "model", parts: [{ text: text }] });
+      }
+      
+      let typingIndicator = null;
+      function showTypingIndicator() {
+        if (!typingIndicator && chatMessagesContainer) { // Adicionado cheque para chatMessagesContainer
+            typingIndicator = document.createElement('div');
+            typingIndicator.classList.add('message', 'bot', 'typing-indicator');
+            
+            const botAvatar = document.createElement('div');
+            botAvatar.classList.add('bot-avatar');
+            botAvatar.textContent = 'IA';
+
+            const messageTextDiv = document.createElement('div');
+            messageTextDiv.classList.add('message-text');
+            messageTextDiv.textContent = "MaIA está digitando...";
+            
+            const messageContentDiv = document.createElement('div');
+            messageContentDiv.classList.add('message-content');
+            messageContentDiv.appendChild(botAvatar);
+            messageContentDiv.appendChild(messageTextDiv);
+            typingIndicator.appendChild(messageContentDiv);
+
+            chatMessagesContainer.appendChild(typingIndicator);
+            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+        }
+      }
+
+      function removeTypingIndicator() {
+        if (typingIndicator && chatMessagesContainer && typingIndicator.parentNode === chatMessagesContainer) { // Adicionado cheque para chatMessagesContainer e parentNode
+            chatMessagesContainer.removeChild(typingIndicator);
+            typingIndicator = null;
+        }
+      }
+
+      async function getBotResponse(userMessage) {
+        showTypingIndicator();
+        // Envia o histórico completo para o n8n para que ele possa gerenciar o contexto
+        const payload = {
+          chatHistory: chatHistory,
+          userMessage: userMessage // Opcional, pode ser extraído do chatHistory no n8n
         };
-        v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
-        v.type = "text/javascript";
-        s.parentNode.insertBefore(v, s);
-      })(document, "script");
+
+        try {
+          const response = await fetch(N8N_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Erro do Webhook n8n:', errorData);
+            throw new Error(`Webhook Error: ${response.status} ${response.statusText}`);
+          }
+
+          const result = await response.json();
+          removeTypingIndicator();
+
+          // Esperamos que o n8n retorne um objeto com uma propriedade 'response' contendo o texto do bot
+          if (result && result.response) {
+            const botText = result.response;
+            addBotMessage(botText);
+          } else {
+            console.error('Resposta inesperada do n8n:', result);
+            addBotMessage("Desculpe, não consegui processar sua mensagem no momento.");
+          }
+        } catch (error) {
+          removeTypingIndicator();
+          console.error('Erro ao buscar resposta do bot via n8n:', error);
+          addBotMessage("Ops! Algo deu errado. Tente novamente mais tarde.");
+        }
+      }
+
+      async function handleSendMessage() {
+        if (!chatInput) return; // Cheque se chatInput existe
+        const messageText = chatInput.value.trim();
+        if (messageText) {
+          addUserMessage(messageText);
+          chatInput.value = '';
+          await getBotResponse(messageText);
+        }
+      }
+      
+      // Inicialização do Chat quando o DOM estiver pronto
+      document.addEventListener('DOMContentLoaded', () => {
+        if (chatMessagesContainer && chatMessagesContainer.children.length === 0) {
+            addBotMessage("Olá! Sou a MaIA, sua assistente virtual. Como posso te ajudar hoje?");
+        }
+        if (chatInput) { // Foca no input quando a página carrega
+            chatInput.focus();
+        }
+
+        if (sendChatBtn) {
+            sendChatBtn.addEventListener('click', handleSendMessage);
+        }
+        if (chatInput) {
+            chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSendMessage();
+            }
+            });
+        }
+      });
+
     </script>
     <div id="toast-container"></div>
   </body>

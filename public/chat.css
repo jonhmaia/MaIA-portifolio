@@ -1,0 +1,261 @@
+/* Importa uma fonte moderna e limpa, similar à da referência */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    /* Definição de variáveis CSS para cores */
+    --background-dark: #121212; /* Fundo principal escuro */
+    --surface-dark: #1F1F1F; /* Superfícies como cabeçalho, input */
+    --text-light: #E0E0E0; /* Texto principal claro */
+    --text-secondary: #B0B0B0; /* Texto secundário, informações */
+    --brand-yellow: #FFD100; /* Amarelo/Laranja da marca */
+    --brand-yellow-dark: #CCA700; /* Amarelo mais escuro para hover */
+    --bubble-bot: #2C2C2C; /* Cor do balão de mensagem do bot */
+    --bubble-user: #007bff; /* Cor do balão de mensagem do usuário (exemplo, pode ser ajustado) */
+    --border-color: #333333; /* Cor da borda */
+}
+
+body {
+    font-family: 'Inter', sans-serif; /* Aplica a fonte importada */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Centraliza o chatbot horizontalmente */
+    align-items: center; /* Centraliza o chatbot verticalmente */
+    min-height: 100vh; /* Garante que o body ocupe a altura total da viewport */
+    background-color: var(--background-dark); /* Fundo escuro do body */
+    color: var(--text-light); /* Cor do texto padrão */
+    overflow: hidden; /* Evita barras de rolagem no body, se o chatbot for menor */
+}
+
+/* Container principal do chatbot */
+.chat-container {
+    width: 100%;
+    max-width: 400px; /* Largura máxima para o chatbot (ideal para iframe) */
+    height: 90vh; /* Altura máxima para o chatbot */
+    max-height: 700px; /* Altura máxima para o chatbot */
+    background-color: var(--surface-dark); /* Fundo do container */
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Sombra para profundidade */
+    display: flex;
+    flex-direction: column; /* Organiza os elementos em coluna */
+    overflow: hidden; /* Esconde conteúdo que transborda */
+    border: 1px solid var(--border-color); /* Borda sutil */
+}
+
+/* Cabeçalho do Chatbot */
+.chat-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: var(--surface-dark);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.chatbot-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Torna a imagem circular */
+    margin-right: 15px;
+    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    border: 2px solid var(--brand-yellow); /* Borda amarela no logo */
+}
+
+.chatbot-name {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--text-light);
+    margin: 0;
+}
+
+/* Área de Mensagens */
+.chat-messages {
+    flex-grow: 1; /* Permite que esta área ocupe o espaço restante */
+    padding: 20px;
+    overflow-y: auto; /* Adiciona barra de rolagem vertical se o conteúdo for maior */
+    background-color: var(--background-dark); /* Fundo das mensagens */
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço entre os balões de mensagem */
+}
+
+/* Estilo da barra de rolagem (WebKit - Chrome, Safari, Edge) */
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: var(--surface-dark);
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: var(--brand-yellow);
+    border-radius: 10px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-yellow-dark);
+}
+
+
+/* Balão de Mensagem Geral */
+.message-bubble {
+    display: flex;
+    align-items: flex-start; /* Alinha o conteúdo ao topo do balão */
+    max-width: 85%; /* Largura máxima do balão */
+}
+
+/* Balão de Mensagem do Bot */
+.bot-message {
+    justify-content: flex-start; /* Alinha o balão do bot à esquerda */
+    align-self: flex-start; /* Garante que o balão do bot fique à esquerda */
+    margin-right: auto; /* Empurra para a esquerda */
+}
+
+.bot-message .message-avatar {
+    margin-right: 10px;
+    flex-shrink: 0; /* Evita que o avatar encolha */
+}
+
+.bot-avatar img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--brand-yellow); /* Borda amarela no avatar do bot */
+    padding: 2px; /* Espaçamento interno para a borda */
+}
+
+.bot-message .message-content {
+    background-color: var(--bubble-bot);
+    color: var(--text-light);
+    padding: 12px 15px;
+    border-radius: 18px;
+    border-bottom-left-radius: 4px; /* Canto mais reto no lado da origem */
+    font-size: 0.95em;
+    line-height: 1.4;
+    word-wrap: break-word; /* Quebra palavras longas */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.bot-message .message-info {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 5px;
+}
+
+.bot-message .message-sender {
+    font-weight: 600;
+    color: var(--brand-yellow); /* Nome do remetente em amarelo */
+    font-size: 0.85em;
+    margin-right: 8px;
+}
+
+.bot-message .message-time {
+    font-size: 0.75em;
+    color: var(--text-secondary);
+}
+
+/* Balão de Mensagem do Usuário */
+.user-message {
+    justify-content: flex-end; /* Alinha o balão do usuário à direita */
+    align-self: flex-end; /* Garante que o balão do usuário fique à direita */
+    margin-left: auto; /* Empurra para a direita */
+}
+
+.user-message .message-content {
+    background-color: var(--brand-yellow); /* Cor do balão do usuário */
+    color: var(--surface-dark); /* Cor do texto no balão do usuário */
+    padding: 12px 15px;
+    border-radius: 18px;
+    border-bottom-right-radius: 4px; /* Canto mais reto no lado da origem */
+    font-size: 0.95em;
+    line-height: 1.4;
+    word-wrap: break-word;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* Área de Entrada de Mensagem */
+.chat-input-area {
+    padding: 15px 20px;
+    background-color: var(--surface-dark);
+    border-top: 1px solid var(--border-color);
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: var(--background-dark);
+    border-radius: 25px; /* Bordas arredondadas para o input */
+    padding: 8px 15px;
+    border: 1px solid var(--border-color);
+}
+
+.microphone-icon {
+    color: var(--brand-yellow);
+    font-size: 1.2em;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.message-input {
+    flex-grow: 1; /* Permite que o input ocupe o máximo de espaço */
+    border: none;
+    background: transparent;
+    color: var(--text-light);
+    font-size: 1em;
+    outline: none; /* Remove o contorno ao focar */
+    padding: 5px 0; /* Ajusta o padding interno */
+}
+
+.message-input::placeholder {
+    color: var(--text-secondary); /* Cor do placeholder */
+    opacity: 0.7;
+}
+
+.send-button {
+    background-color: var(--brand-yellow);
+    color: var(--surface-dark);
+    border: none;
+    border-radius: 50%; /* Botão circular */
+    width: 38px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease; /* Transição suave no hover */
+}
+
+.send-button:hover {
+    background-color: var(--brand-yellow-dark);
+}
+
+/* Rodapé */
+.chat-footer {
+    padding: 10px 20px;
+    background-color: var(--surface-dark);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 0.75em;
+    color: var(--text-secondary);
+}
+
+.chat-footer p {
+    margin: 5px 0;
+}
+
+/* Mídias Queries para responsividade */
+@media (max-width: 600px) {
+    .chat-container {
+        width: 100vw; /* Ocupa a largura total da tela em dispositivos menores */
+        height: 100vh; /* Ocupa a altura total da tela em dispositivos menores */
+        max-width: none; /* Remove a largura máxima */
+        max-height: none; /* Remove a altura máxima */
+        border-radius: 0; /* Remove bordas arredondadas para cobrir a tela toda */
+        box-shadow: none; /* Remove sombra */
+    }
+}
