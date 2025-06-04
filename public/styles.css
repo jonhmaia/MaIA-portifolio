@@ -19,7 +19,7 @@
   --font-family-base: "Poppins", sans-serif;
   --container-width: 1140px;
   --card-bg-color: #1a202c;
-  --header-pill-bg-color: #1a202c;
+
   --secondary-text-color: #ffffff;
   --accent-color: #00f0c0; /* Verde ciano vibrante */
   --accent-color-darker: #00c49a;
@@ -51,7 +51,7 @@ body {
   position: relative;
   padding-top: var(--header-height);
 }
-    
+
 #particles-js {
   position: fixed;
   width: 100%;
@@ -191,7 +191,6 @@ section {
   z-index: 1000;
   padding: 0.5rem 0;
   transition: padding 0.3s ease;
- 
 }
 
 .navbar.container {
@@ -199,13 +198,18 @@ section {
   justify-content: space-between;
   align-items: center;
   height: 60px; /* Altura total do header */
-  background-color: var(--header-pill-bg-color);
+
   border-radius: 15px;
   padding: 0.5rem 1.5rem;
   margin-right: auto;
   margin-left: auto;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
   border: 1px solid var(--header-pill-border-color);
+  background: linear-gradient(
+    145deg,
+    rgba(var(--accent-color-rgb), 0.05),
+    rgba(var(--card-bg-color), 0.5)
+  );
 }
 
 .navbar-left {
@@ -746,10 +750,10 @@ section {
   body {
     padding-top: var(--header-height);
   }
- .nav-list1{
-      display: none;
-       visibility: hidden;
-    }
+  .nav-list1 {
+    display: none;
+    visibility: hidden;
+  }
   .header {
     padding: 0.25rem 0;
   }
@@ -768,7 +772,7 @@ section {
   .logo-img-header {
     height: 100px;
   }
-
+  
   /* Exibe o botão de toggle e esconde a lista de navegação padrão em desktop */
   .nav-toggle {
     display: block; /* Mostra o botão de hambúrguer */
@@ -868,13 +872,12 @@ section {
       opacity 0.4s ease-in, visibility 0s linear 0s;
   }
 
-
   .nav-item {
     width: 100%; /* Itens ocupam largura total */
     text-align: center;
     margin-bottom: 20px; /* Espaçamento entre os itens */
   }
- 
+
   .nav-item:last-of-type {
     /* Use last-of-type para pegar o último LI */
     margin-bottom: 0;
@@ -944,7 +947,6 @@ section {
     z-index: 998; /* Deve ficar abaixo do menu */
   }
 
-
   @media (max-width: 767.98px) {
     /* Small devices (landscape phones, less than 768px) */
     section {
@@ -956,9 +958,9 @@ section {
     h2 {
       font-size: 2rem;
     }
- .nav-list1{
+    .nav-list1 {
       display: none;
-       visibility: hidden;
+      visibility: hidden;
     }
     :root {
       --header-content-effective-height: 35px;
@@ -1039,7 +1041,6 @@ section {
     .nav-item {
       margin-bottom: 15px;
     }
-   
   }
 
   @media (max-width: 575.98px) {
@@ -1053,9 +1054,9 @@ section {
     h1 {
       font-size: 2.2rem;
     }
-    .nav-list1{
+    .nav-list1 {
       display: none;
-       visibility: hidden;
+      visibility: hidden;
     }
     :root {
       --header-content-effective-height: 30px;
@@ -1159,8 +1160,5 @@ section {
     .nav-item {
       margin-bottom: 10px;
     }
-
-    
   }
 }
-

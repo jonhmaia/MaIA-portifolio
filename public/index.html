@@ -29,7 +29,7 @@
       .chat-header {
         padding: 15px;
         display: flex;
-        justify-content: center; /* Alterado para space-between caso queira adicionar algo à direita */
+        justify-content: center; 
         align-items: center;
         border-bottom: 1px solid #293969;
       }
@@ -41,15 +41,12 @@
       }
       
      .chat-header-logo {
-        height: 30px; /* Altura definida para a logo */
-        width: auto;  /* Largura automática para manter a proporção */
-        object-fit: contain; /* Garante que a imagem caiba sem distorção */
-        margin-right: 12px; /* Espaçamento entre a logo e o título */
-        flex-shrink: 0; /* Impede que a logo encolha se o título for longo */
+        height: 30px; 
+        width: auto;  
+        object-fit: contain; 
+        margin-right: 12px; 
+        flex-shrink: 0; 
       }
-
-      /* O botão de fechar não é mais necessário para o chat embutido */
-      /* .chat-close-btn ... */
 
       .chat-messages {
         flex-grow: 1;
@@ -90,7 +87,6 @@
       }
 
       .message.bot {
-  
         background-color:#0b0f1b ;
         align-self: flex-start;
         border-bottom-left-radius: 5px;
@@ -101,12 +97,12 @@
         height: 30px;
         border-radius: 50%;
         margin-right: 10px;
-        background-color: #00c49a;
+        background-color: #00c49a; 
         display: inline-flex;
         align-items: center;
         justify-content: center;
         font-weight: bold;
-        color: #1e1e1e;
+        color: #1e1e1e; 
         font-size: 0.8rem;
         flex-shrink: 0;
       }
@@ -120,7 +116,7 @@
          word-wrap: break-word;
       }
 
-      .message.typing-indicator { /* Estilo para o indicador de "digitando" */
+      .message.typing-indicator { 
         color: #aaa;
         font-style: italic;
         padding: 5px 15px;
@@ -130,56 +126,173 @@
       .chat-input-area {
         display: flex;
         padding: 12px 15px;
-       
       }
 
       .chat-input {
         flex-grow: 1;
         padding: 10px 15px;
-        border: 1px solid #293969;
-        border-radius: 20px;
+        border: 1px solid #293969; 
+        border-radius: 20px; 
         background: linear-gradient(
-    145deg,
-    rgba(var(--accent-color-rgb), 0.05),
-    rgba(var(--card-bg-color), 0.5)
-  );
-        color: #e0e0e0;
+          145deg,
+          rgba(var(--accent-color-rgb), 0.05), 
+          rgba(var(--card-bg-color), 0.5)
+        );
+        color: #e0e0e0; 
         font-size: 0.95rem;
         margin-right: 10px;
         outline: none;
       }
       .chat-input:focus {
-        border-color: var(--accent-color);
+        border-color: var(--accent-color); 
       }
 
       .send-btn {
-        background-color: var(--accent-color);
-        color: #181818;
+        background-color: var(--accent-color); 
+        color: #181818; 
         border: none;
-        border-radius: 50%;
+        border-radius: 50%; 
         width: 40px;
         height: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        font-size: 1.3rem;
+        font-size: 1.3rem; 
         transition: background-color 0.2s;
       }
       .send-btn:hover {
-        background-color: var(--accent-color-darker);
+        background-color: var(--accent-color-darker); 
       }
 
       .chat-footer {
         padding: 8px 15px;
         text-align: center;
         font-size: 0.75rem;
-        color: #888;
+        color: #888; 
       }
+
+      /* FOOTER FIXO ESTILIZADO */
+      #fixed-doubt-footer {
+        position: fixed;
+        bottom: 1rem; 
+        left: 1rem;   
+        right: 1rem;  
+        width: auto;  
+        max-width: var(--container-width); /* Mesma largura máxima do header */
+        margin-left: auto;  
+        margin-right: auto; 
+        
+        padding: 0.5rem 1.5rem; /* Padding igual ao do header para altura consistente */
+        border-radius: 25px; 
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); 
+        border: 1px solid var(--header-pill-border-color); 
+        background: linear-gradient(
+          145deg,
+          rgba(var(--accent-color-rgb), 0.08), 
+          rgba(var(--card-bg-color), 0.6)
+        ); 
+        z-index: 1000; 
+
+        display: flex; 
+        flex-direction: row; /* Texto e botão lado a lado */
+        align-items: center; /* Alinha verticalmente ao centro */
+        justify-content: center; /* Centraliza o grupo texto+botão */
+        gap: 1.5rem; /* Espaço entre o texto e o botão */
+      }
+
+      #fixed-doubt-footer p {
+        margin: 0; /* Remove margem padrão do parágrafo */
+        color: #cbd5e1; 
+        font-size: 1rem; 
+      }
+       #fixed-doubt-footer p strong {
+        color: #e2e8f0; 
+       }
+
+      .btn-maia-footer {
+        background:  linear-gradient(135deg, #293969, #000000); 
+        color: #ffffff; 
+        padding: 0.6rem 1.5rem; /* Padding ajustado para não aumentar muito a altura */
+        border-radius: 25px; 
+        font-weight: 600; 
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-flex; 
+        align-items: center;
+        gap: 0.6rem; 
+        border: 1px solid #00f0c0; 
+        box-shadow: 0 4px 10px rgba(250, 204, 21, 0.2), 0 1px 3px rgba(0,0,0,0.1); 
+        white-space: nowrap; /* Impede que o texto do botão quebre linha */
+      }
+
+      .btn-maia-footer:hover {
+        background:   linear-gradient(135deg, #00f0c0, #000000);
+        box-shadow: 0 6px 15px #00f0c0, 0 2px 5px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+      }
+      .btn-maia-footer:active {
+        transform: translateY(0px);
+        box-shadow: 0 3px 8px rgba(250, 204, 21, 0.25), 0 1px 2px rgba(0,0,0,0.1);
+      }
+        .btn-maia-footer img {
+        width: 30px;
+        height: 30px;
+        flex-shrink: 0;
+        object-fit: contain;
+       }
+
+      body {
+        /* Ajustar padding-bottom se necessário, considerando a nova altura do footer.
+           O header tem height: 60px. O footer com padding 0.5rem vertical + font-size 1rem + padding do botão,
+           deve ter uma altura similar. 80px de padding-bottom deve ser suficiente.
+        */
+        padding-bottom: 90px; /* Aumentado um pouco para garantir espaço */
+      }
+
+      /* Media query para telas menores - footer */
+      @media (max-width: 767px) {
+        #fixed-doubt-footer {
+          flex-direction: column; /* Volta para coluna em telas pequenas */
+          padding: 0.6rem 1rem;
+          gap: 0.5rem; /* Reduz o gap em telas pequenas */
+        }
+        #fixed-doubt-footer p {
+          font-size: 0.9rem;
+        }
+        .btn-maia-footer {
+          padding: 0.6rem 1.2rem;
+          font-size: 0.9rem;
+        }
+        .btn-maia-footer svg {
+          width: 16px;
+          height: 16px;
+        }
+         body {
+           padding-bottom: 130px; /* Mais padding no body em mobile por causa do footer em coluna */
+         }
+      }
+      @media (max-width: 480px) { /* Ajuste para telas bem pequenas */
+        #fixed-doubt-footer {
+            gap: 0.4rem;
+        }
+        #fixed-doubt-footer p {
+          font-size: 0.85rem;
+        }
+        .btn-maia-footer {
+          padding: 0.5rem 1rem;
+          font-size: 0.85rem;
+        }
+         .btn-maia-footer svg {
+          width: 14px;
+          height: 14px;
+        }
+      }
+
+
     </style>
   </head>
-  <body>
-    <div id="particles-js"></div>
+  <body class="bg-slate-900 text-slate-200"> <div id="particles-js"></div>
 
     <header class="header">
       <nav class="navbar container">
@@ -199,9 +312,6 @@
          </li>
          <li class="nav-item">
            <a href="#about-us" class="nav-link">Sobre Nós</a>
-         </li>
-         <li class="nav-item">
-           <a href="#services" class="nav-link">Serviços</a>
          </li>
          <li class="nav-item">
            <a href="#chatbot-section-nav" class="nav-link">Chatbot</a>
@@ -330,23 +440,14 @@
         </div>
       </section>
 
-      <section id="services" class="services container">
-        <!-- Conteúdo da seção de serviços virá aqui -->
-      </section>
-
-      <!-- SEÇÃO CHATBOT MODIFICADA PARA CONTER A INTERFACE DO CHAT DIRETAMENTE -->
       <section id="chatbot-section-nav" class="container mx-auto scroll-mt-20 py-12 md:py-16">
-        <!-- INTERFACE DO CHAT EMBUTIDA AQUI -->
         <div id="inlineChatInterface" class="inline-chat-ui">
           <div class="chat-header">
-            <!-- Você pode adicionar um logo aqui se desejar, ex: -->
-           <img src="images/chat.png" alt="MaIA Icon" class="chat-header-logo" />
-
-        
+            <img src="images/chat.png" alt="MaIA Icon" class="chat-header-logo" />
           </div>
           <div id="chatMessages" class="chat-messages">
-            <!-- Mensagens aparecerão aqui -->
-          </div>
+            <!-- Mensagens do chat serão adicionadas aqui via JavaScript -->
+            </div>
           <div class="chat-input-area">
             <input type="text" id="chatInput" class="chat-input" placeholder="Envie uma mensagem para MaIA..." />
             <button id="sendChatBtn" class="send-btn" aria-label="Enviar mensagem">
@@ -359,7 +460,11 @@
           </div>
         </div>
       </section>
-      <!-- FIM DA SEÇÃO CHATBOT MODIFICADA -->
+
+      <section id="services" class="services container">
+        <h2 class="text-3xl font-bold text-center mb-12">Nossos Serviços</h2>
+          <p class="text-center mb-8 text-lg">Placeholder para a seção de serviços. Adicione aqui o conteúdo sobre os serviços oferecidos.</p>
+      </section>
   
       <section id="contact" class="contact container">
         <div class="contact-wrapper">
@@ -453,245 +558,314 @@
       </section>
     </main>
 
-   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+   <footer id="fixed-doubt-footer">
+      <p>Dúvidas? <br><strong>Converse com a MaIA!</strong></p>
+      <button class="btn-maia-footer" onclick="window.location.href='#chatbot-section-nav';">
+        Falar com a
+        <img src="images/chat.png" alt="MaIA Logo"  /> 
+      </button>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script src="script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script type="module">
-  // Função showToast (existente)
-  function showToast(message, type = "info") {
-    const container = document.getElementById("toast-container");
-    if (!container) {
-      console.warn("Toast container não encontrado.");
-      return;
-    }
-    const toast = document.createElement("div");
-    toast.className = `toast ${type}`;
-    toast.textContent = message;
-    container.appendChild(toast);
-    setTimeout(() => {
-      if (toast.parentNode === container) {
-        container.removeChild(toast);
-      }
-    }, 6000);
-  }
-
-  // Código do formulário Supabase (existente)
-  const supabaseUrl = "https://ojblhyflwcsckteiypje.supabase.co";
-  const supabaseKey =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qYmxoeWZsd2NzY2t0ZWl5cGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NTg4NjEsImexZCI6MjA2MTAzNDg2MX0.-WSO_IgaXW81u8aqtJbRiLky40rFGpgAsRwArAcIU4M";
-  const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
-  const form = document.querySelector(".contact-form form");
-  if (form) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const name = form.name.value.trim();
-      const email = form.email.value.trim();
-      const whatsapp = form.whatsapp?.value?.trim() || "";
-      const message = form.message.value.trim();
-      if (!name || !email || !message) {
-        if (typeof showToast === "function") showToast("Por favor, preencha todos os campos obrigatórios.", "error");
-        else console.error("Função showToast não definida.");
-        return;
-      }
-      if (whatsapp && !/^[0-9]{10,15}$/.test(whatsapp)) {
-        if (typeof showToast === "function") showToast("Por favor, insira um número de WhatsApp válido.", "error");
-        else console.error("Função showToast não definida.");
-        return;
-      }
-      try {
-        const { error } = await supabaseClient
-          .from("contatos")
-          .insert([{ name, email, whatsapp, message, processado: false }]);
-        if (error) {
-          const errorMessage = error.message || "Ocorreu um erro ao enviar sua mensagem. Tente novamente.";
-          if (typeof showToast === "function") showToast("Erro ao enviar: " + errorMessage, "error");
-          else console.error("Erro ao enviar: " + errorMessage);
-        } else {
-          if (typeof showToast === "function") showToast("Mensagem enviada com sucesso! Em breve entraremos em contato.", "success");
-          else console.log("Mensagem enviada com sucesso!");
-          form.reset();
-        }
-      } catch (submitError) {
-        if (typeof showToast === "function") showToast("Ocorreu um erro inesperado. Verifique sua conexão.", "error");
-        else console.error("Ocorreu um erro inesperado. Verifique sua conexão.");
-      }
-    });
-  }
-
-  // --- LÓGICA DO CHATBOT EMBUTIDO ---
-  // Elementos do DOM para o chat embutido
-  const chatMessagesContainer = document.getElementById('chatMessages');
-  const chatInput = document.getElementById('chatInput');
-  const sendChatBtn = document.getElementById('sendChatBtn');
-
-  let chatHistory = [];
-
-  // ATENÇÃO: Substitua esta URL pelo seu Webhook URL do n8n
-  const N8N_WEBHOOK_URL = "https://n8n.maia-ia.sbs/webhook/8449b14a-b5eb-4aeb-a09c-96d95f18dd52";
-
-  // Lógica para gerar e gerenciar o Session ID
-  const SESSION_ID_KEY = 'maiaChatSessionId';
-  let currentSessionId = localStorage.getItem(SESSION_ID_KEY);
-
-  // Se não houver um ID de sessão, gere um novo
-  if (!currentSessionId) {
-    // Usando crypto.randomUUID() para gerar um UUID robusto em navegadores modernos
-    // Fallback para uma função simples se crypto.randomUUID não for suportado
-    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
-      currentSessionId = crypto.randomUUID();
-    } else {
-      // Fallback simples para compatibilidade com navegadores mais antigos
-      currentSessionId = 'sess_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
-    }
-    localStorage.setItem(SESSION_ID_KEY, currentSessionId);
-    console.log("Novo ID de sessão gerado:", currentSessionId);
-  } else {
-    console.log("ID de sessão existente:", currentSessionId);
-  }
-
-  // Função para adicionar mensagem à UI do chat
-  function addMessageToChat(text, sender) {
-    const messageDiv = document.createElement('div');
-    messageDiv.classList.add('message', sender);
-
-    if (sender === 'bot') {
-      const botAvatar = document.createElement('div');
-      botAvatar.classList.add('bot-avatar');
-      botAvatar.textContent = 'IA';
-
-      const messageTextDiv = document.createElement('div');
-      messageTextDiv.classList.add('message-text');
-      messageTextDiv.textContent = text;
-
-      const messageContentDiv = document.createElement('div');
-      messageContentDiv.classList.add('message-content');
-      messageContentDiv.appendChild(botAvatar);
-      messageContentDiv.appendChild(messageTextDiv);
-      messageDiv.appendChild(messageContentDiv);
-    } else { // User message
-      messageDiv.textContent = text;
-    }
-
-    chatMessagesContainer.appendChild(messageDiv);
-    chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-  }
-
-  function addUserMessage(text) {
-    addMessageToChat(text, 'user');
-    chatHistory.push({
-      role: "user",
-      parts: [{
-        text: text
-      }]
-    });
-    // Não é necessário salvar o histórico no localStorage aqui se o n8n for responsável pela persistência
-  }
-
-  function addBotMessage(text) {
-    addMessageToChat(text, 'bot');
-    chatHistory.push({
-      role: "model",
-      parts: [{
-        text: text
-      }]
-    });
-    // Não é necessário salvar o histórico no localStorage aqui se o n8n for responsável pela persistência
-  }
-
-  let typingIndicator = null;
-
-  function showTypingIndicator() {
-    if (!typingIndicator && chatMessagesContainer) {
-      typingIndicator = document.createElement('div');
-      typingIndicator.classList.add('message', 'bot', 'typing-indicator');
-
-      const botAvatar = document.createElement('div');
-      botAvatar.classList.add('bot-avatar');
-      botAvatar.textContent = 'IA';
-
-      const messageTextDiv = document.createElement('div');
-      messageTextDiv.classList.add('message-text');
-      messageTextDiv.textContent = "MaIA está digitando...";
-
-      const messageContentDiv = document.createElement('div');
-      messageContentDiv.classList.add('message-content');
-      messageContentDiv.appendChild(botAvatar);
-      messageContentDiv.appendChild(messageTextDiv);
-      typingIndicator.appendChild(messageContentDiv);
-
-      chatMessagesContainer.appendChild(typingIndicator);
-      chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-    }
-  }
-
-  function removeTypingIndicator() {
-    if (typingIndicator && chatMessagesContainer && typingIndicator.parentNode === chatMessagesContainer) {
-      chatMessagesContainer.removeChild(typingIndicator);
-      typingIndicator = null;
-    }
-  }
-
-  async function getBotResponse(userMessage) {
-    showTypingIndicator();
-    // Envia o histórico completo E o Session ID para o n8n
-    const payload = {
-      userMessage: userMessage,
-      sessionId: currentSessionId // <-- Agora o ID da sessão está incluído!
-    };
-
-    try {
-      const response = await fetch(N8N_WEBHOOK_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Erro do Webhook n8n:', errorData);
-        throw new Error(`Webhook Error: ${response.status} ${response.statusText}`);
-      }
-
-      const result = await response.json();
-      removeTypingIndicator();
-
-      if (result && result.response) {
-        const botText = result.response;
-        addBotMessage(botText);
-      } else {
-        console.error('Resposta inesperada do n8n:', result);
-        addBotMessage("Desculpe, não consegui processar sua mensagem no momento.");
-      }
-    } catch (error) {
-      removeTypingIndicator();
-      console.error('Erro ao buscar resposta do bot via n8n:', error);
-      addBotMessage("Ops! Algo deu errado. Tente novamente mais tarde.");
-    }
-  }
-
-  async function handleSendMessage() {
-    if (!chatInput) return;
-    const messageText = chatInput.value.trim();
-    if (messageText) {
-      addUserMessage(messageText);
-      chatInput.value = '';
-      await getBotResponse(messageText);
-    }
-  }
-
-  // Inicialização do Chat quando o DOM estiver pronto
   document.addEventListener('DOMContentLoaded', () => {
-    // Se você estiver gerenciando o histórico no n8n, o chatHistory local
-    // pode começar vazio e apenas a mensagem inicial será exibida.
-    // O n8n usará o sessionId para carregar o histórico persistido.
-    if (chatMessagesContainer && chatMessagesContainer.children.length === 0) {
-      addBotMessage("Olá! Sou a MaIA, sua assistente virtual. Como posso te ajudar hoje?");
+    // Remove URL hash para evitar rolagem direta para uma seção
+    if (window.location.hash) {
+      history.replaceState('', document.title, window.location.pathname + window.location.search);
     }
-    if (chatInput) {
-      chatInput.focus();
+
+    // Garante que a página comece no topo
+    window.scrollTo(0, 0);
+
+    // Opcional: Adicione um pequeno atraso para garantir que execute após toda a renderização
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
+
+    // Função showToast
+    function showToast(message, type = "info") {
+      const container = document.getElementById("toast-container");
+      if (!container) {
+        console.warn("Toast container não encontrado.");
+        return;
+      }
+      const toast = document.createElement("div");
+      toast.className = `toast ${type}`;
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(() => {
+        if (toast.parentNode === container) {
+          container.removeChild(toast);
+        }
+      }, 6000);
+    }
+
+    // --- LÓGICA DO FORMULÁRIO SUPABASE ---
+    const supabaseUrl = "https://ojblhyflwcsckteiypje.supabase.co";
+    const supabaseKey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qYmxoeWZsd2NzY2t0ZWl5cGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NTg4NjEsImV4cCI6MjA2MTAzNDg2MX0.-WSO_IgaXW81u8aqtJbRiLky40rFGpgAsRwArAcIU4M";
+    const form = document.querySelector(".contact-form form");
+    let supabaseClient; // Declare supabaseClient outside the if block
+
+    // Verifica se a biblioteca Supabase está carregada
+    if (typeof supabase !== 'undefined' && supabase) {
+      try {
+        const { createClient } = supabase; // Destrutura createClient do objeto global supabase
+        if (typeof createClient === 'function') {
+          supabaseClient = createClient(supabaseUrl, supabaseKey);
+        } else {
+          console.error("Supabase 'createClient' não é uma função. Verifique a importação da biblioteca Supabase.");
+        }
+      } catch (e) {
+        console.error("Erro ao inicializar o Supabase Client:", e);
+      }
+    } else {
+      console.error("Biblioteca Supabase (objeto global 'supabase') não carregada! Certifique-se de que o script Supabase JS está incluído corretamente no seu HTML antes deste script.");
+    }
+
+    if (form) {
+      if (supabaseClient) { // Procede apenas se o supabaseClient foi inicializado
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const name = form.name.value.trim();
+          const email = form.email.value.trim();
+          const whatsapp = form.whatsapp?.value?.trim() || "";
+          const message = form.message.value.trim();
+
+          if (!name || !email || !message) {
+            if (typeof showToast === "function") showToast("Por favor, preencha todos os campos obrigatórios.", "error");
+            else console.error("Função showToast não definida.");
+            return;
+          }
+          if (whatsapp && !/^[0-9]{10,15}$/.test(whatsapp)) {
+            if (typeof showToast === "function") showToast("Por favor, insira um número de WhatsApp válido.", "error");
+            else console.error("Função showToast não definida.");
+            return;
+          }
+          try {
+            const { data, error } = await supabaseClient
+              .from("contatos")
+              .insert([{ name, email, whatsapp, message, processado: false }])
+              .select(); // Adicionado .select() para melhor feedback/manejo de erro
+
+            if (error) {
+              const errorMessage = error.message || "Ocorreu um erro ao enviar sua mensagem. Tente novamente.";
+              if (typeof showToast === "function") showToast("Erro ao enviar: " + errorMessage, "error");
+              else console.error("Erro ao enviar: " + errorMessage);
+            } else {
+              if (typeof showToast === "function") showToast("Mensagem enviada com sucesso! Em breve entraremos em contato.", "success");
+              else console.log("Mensagem enviada com sucesso!");
+              form.reset();
+            }
+          } catch (submitError) {
+            console.error("Erro no bloco try/catch do formulário Supabase:", submitError);
+            if (typeof showToast === "function") showToast("Ocorreu um erro inesperado no envio. Verifique sua conexão.", "error");
+            else console.error("Ocorreu um erro inesperado. Verifique sua conexão.");
+          }
+        });
+      } else {
+        // Supabase client não pôde ser inicializado, desabilita o formulário
+        console.warn("Supabase client não inicializado. O formulário de contato será desabilitado.");
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = "Contato Indisponível";
+        }
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showToast("Erro: A funcionalidade de contato está temporariamente indisponível devido a um problema de configuração.", "error");
+        });
+      }
+    }
+    // --- FIM DA LÓGICA DO FORMULÁRIO SUPABASE ---
+
+
+    // --- LÓGICA DO CHATBOT EMBUTIDO ---
+    const chatMessagesContainer = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const sendChatBtn = document.getElementById('sendChatBtn');
+    let chatHistory = [];
+    const N8N_WEBHOOK_URL = "https://n8n.maia-ia.sbs/webhook/8449b14a-b5eb-4aeb-a09c-96d95f18dd52";
+    const SESSION_ID_KEY = 'maiaChatSessionId';
+    let currentSessionId = localStorage.getItem(SESSION_ID_KEY);
+
+    if (!currentSessionId) {
+      if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        currentSessionId = crypto.randomUUID();
+      } else {
+        currentSessionId = 'sess_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+      }
+      localStorage.setItem(SESSION_ID_KEY, currentSessionId);
+      console.log("Novo ID de sessão gerado:", currentSessionId);
+    } else {
+      console.log("ID de sessão existente:", currentSessionId);
+    }
+
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
+    async function addMessageToChat(text, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', sender);
+      const messageTextDiv = document.createElement('div');
+      messageTextDiv.classList.add('message-text');
+
+      if (sender === 'bot') {
+        const botAvatar = document.createElement('div');
+        botAvatar.classList.add('bot-avatar');
+        botAvatar.textContent = 'IA';
+        const messageContentDiv = document.createElement('div');
+        messageContentDiv.classList.add('message-content');
+        messageContentDiv.appendChild(botAvatar);
+        messageContentDiv.appendChild(messageTextDiv);
+        messageDiv.appendChild(messageContentDiv);
+      } else {
+        messageTextDiv.textContent = text; // Usuário não tem digitação caractere por caractere
+        messageDiv.appendChild(messageTextDiv);
+      }
+
+      if (chatMessagesContainer) {
+        chatMessagesContainer.appendChild(messageDiv);
+        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+      }
+
+      if (sender === 'bot') {
+        for (let i = 0; i < text.length; i++) {
+          messageTextDiv.textContent += text.charAt(i);
+          if (chatMessagesContainer) chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+          await delay(30);
+        }
+      }
+    }
+
+    function disableChatInput() {
+      if (chatInput) chatInput.disabled = true;
+      if (sendChatBtn) sendChatBtn.disabled = true;
+    }
+
+    function enableChatInput() {
+      if (chatInput) chatInput.disabled = false;
+      if (sendChatBtn) sendChatBtn.disabled = false;
+    }
+
+    function addUserMessage(text) {
+      addMessageToChat(text, 'user'); // Não precisa de await aqui pois não tem delay
+      chatHistory.push({ role: "user", parts: [{ text: text }] });
+    }
+
+    async function addBotMessage(text) {
+      await addMessageToChat(text, 'bot');
+      chatHistory.push({ role: "model", parts: [{ text: text }] });
+    }
+
+    let typingIndicator = null;
+
+    function showTypingIndicator() {
+      if (!typingIndicator && chatMessagesContainer) {
+        typingIndicator = document.createElement('div');
+        typingIndicator.classList.add('message', 'bot', 'typing-indicator');
+        const botAvatar = document.createElement('div');
+        botAvatar.classList.add('bot-avatar');
+        botAvatar.textContent = 'IA';
+        const messageTextDiv = document.createElement('div');
+        messageTextDiv.classList.add('message-text');
+        messageTextDiv.textContent = "MaIA está digitando...";
+        const messageContentDiv = document.createElement('div');
+        messageContentDiv.classList.add('message-content');
+        messageContentDiv.appendChild(botAvatar);
+        messageContentDiv.appendChild(messageTextDiv);
+        typingIndicator.appendChild(messageContentDiv);
+        chatMessagesContainer.appendChild(typingIndicator);
+        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+      }
+    }
+
+    function removeTypingIndicator() {
+      if (typingIndicator && chatMessagesContainer && typingIndicator.parentNode === chatMessagesContainer) {
+        chatMessagesContainer.removeChild(typingIndicator);
+        typingIndicator = null;
+      }
+    }
+
+    async function getBotResponse(userMessage) {
+      disableChatInput();
+      showTypingIndicator();
+      const payload = { userMessage: userMessage, sessionId: currentSessionId };
+
+      try {
+        const response = await fetch(N8N_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error('Erro do Webhook n8n:', errorData);
+          throw new Error(`Webhook Error: ${response.status} ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        removeTypingIndicator();
+
+        if (typeof result === 'object' && result !== null) {
+          let hasMessages = false;
+          let i = 0;
+          while (result.hasOwnProperty(String(i))) {
+            const partText = result[String(i)].trim();
+            if (partText) {
+              await addBotMessage(partText);
+              hasMessages = true;
+            }
+            i++;
+          }
+          if (!hasMessages) {
+            console.error('Resposta inesperada do n8n: Objeto vazio ou sem partes de mensagem esperadas.', result);
+            await addBotMessage("Desculpe, não consegui processar sua mensagem no momento.");
+          }
+        } else {
+          console.error('Resposta inesperada do n8n: Não é um objeto ou formato desconhecido.', result);
+          await addBotMessage("Ops! Algo deu errado. Tente novamente mais tarde.");
+        }
+      } catch (error) {
+        console.error('Erro ao buscar resposta do bot via n8n:', error);
+        removeTypingIndicator();
+        await addBotMessage("Ops! Algo deu errado. Tente novamente mais tarde.");
+      } finally {
+        enableChatInput();
+      }
+    }
+
+    async function handleSendMessage() {
+      if (!chatInput) return;
+      const messageText = chatInput.value.trim();
+      if (messageText) {
+        addUserMessage(messageText);
+        chatInput.value = '';
+        await getBotResponse(messageText);
+      }
+    }
+
+    
+
+     
+    // --- FIM DO CÓDIGO PARA MOSTRAR FOOTER ---
+
+
+    // Lógica inicial do chat
+    if (chatMessagesContainer && chatMessagesContainer.children.length === 0) {
+      (async () => {
+        await addBotMessage("Olá! Sou a MaIA, sua assistente virtual. Como posso te ajudar hoje?");
+        enableChatInput();
+        // Não é recomendado focar automaticamente em campos de texto em todas as situações
+        // if (document.activeElement !== chatInput && chatInput) {
+        // chatInput.focus();
+        // }
+      })();
+    } else {
+      enableChatInput();
     }
 
     if (sendChatBtn) {
@@ -699,7 +873,8 @@
     }
     if (chatInput) {
       chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && !chatInput.disabled) {
+          e.preventDefault();
           handleSendMessage();
         }
       });
