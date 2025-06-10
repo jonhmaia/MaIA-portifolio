@@ -1890,8 +1890,8 @@ section {
 }
 
 .agent-card img {
-  width: 50px; /* Tamanho da imagem do perfil do agente */
-  height: 50px;
+  width: 90px; /* Tamanho da imagem do perfil do agente */
+  height: 90px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--accent-color); /* Borda ao redor da imagem */
@@ -1915,27 +1915,28 @@ section {
 /* Posicionamento dos cards dos agentes */
 .agent-marketing {
   top: 15%;
-  left: 5%;
+  left: 3%;
 }
 
 .agent-sales {
   top: 15%;
-  right: 5%;
+  right: 0%;
 }
 
 .agent-automation {
   bottom: 15%;
-  left: 5%;
+  left: 3%;
 }
 
 .agent-analytics {
   bottom: 15%;
-  right: 5%;
+  right: 0%;
 }
 
 .agent-projects {
   bottom: 0; /* Centralizado na parte inferior */
   left: 50%;
+
   transform: translateX(-50%); /* Centraliza horizontalmente */
 }
 
@@ -1961,8 +1962,8 @@ section {
     gap: 0.8rem;
   }
   .agent-card img {
-    width: 45px;
-    height: 45px;
+    width: 75px;
+    height: 75px;
   }
   .agent-info h4 {
     font-size: 1rem;
@@ -2564,8 +2565,8 @@ section {
 }
 
 .benefit-icon {
-  width: 32px;
-  height: 32px;
+  width: 92px;
+  height: 92px;
   object-fit: contain;
 }
 
