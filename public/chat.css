@@ -3,29 +3,18 @@
 
 :root {
     /* Definição de variáveis CSS para cores */
-    --background-dark: #121212; /* Fundo principal escuro */
-    --surface-dark: #1F1F1F; /* Superfícies como cabeçalho, input */
+   
+   
     --text-light: #E0E0E0; /* Texto principal claro */
     --text-secondary: #B0B0B0; /* Texto secundário, informações */
-    --brand-yellow: #FFD100; /* Amarelo/Laranja da marca */
-    --brand-yellow-dark: #CCA700; /* Amarelo mais escuro para hover */
+    --brand-yellow: #1c5348; /* Amarelo/Laranja da marca */
+    --brand-yellow-dark: #00c49a; /* Amarelo mais escuro para hover */
     --bubble-bot: #2C2C2C; /* Cor do balão de mensagem do bot */
     --bubble-user: #007bff; /* Cor do balão de mensagem do usuário (exemplo, pode ser ajustado) */
-    --border-color: #333333; /* Cor da borda */
+    --border-color: #293969; /* Cor da borda */
 }
 
-body {
-    font-family: 'Inter', sans-serif; /* Aplica a fonte importada */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center; /* Centraliza o chatbot horizontalmente */
-    align-items: center; /* Centraliza o chatbot verticalmente */
-    min-height: 100vh; /* Garante que o body ocupe a altura total da viewport */
-    background-color: var(--background-dark); /* Fundo escuro do body */
-    color: var(--text-light); /* Cor do texto padrão */
-    overflow: hidden; /* Evita barras de rolagem no body, se o chatbot for menor */
-}
+
 
 /* Container principal do chatbot */
 .chat-container {
@@ -180,37 +169,181 @@ body {
 .chat-input-area {
     padding: 15px 20px;
     background-color: var(--surface-dark);
-    border-top: 1px solid var(--border-color);
+   
+    display: flex; /* Make it a flex container */
+    align-items: center; /* Align items vertically */
+    gap: 10px; /* Space between microphone icon and the input/recording display */
 }
 
-.input-wrapper {
-    display: flex;
-    align-items: center;
+/* input-wrapper and audio-recording-display are siblings of recordAudioBtn now */
+.input-wrapper,
+.audio-recording-display {
+    flex-grow: 1; /* Allow them to take available space */
+    width: auto; /* Allow flex-grow to manage width */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+    /* Common styles */
     background-color: var(--background-dark);
-    border-radius: 25px; /* Bordas arredondadas para o input */
+    border-radius: 25px;
     padding: 8px 15px;
     border: 1px solid var(--border-color);
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s, height 0.3s ease-in-out; /* Add height transition */
 }
+
+
+/* Specific styles for input-wrapper */
+.input-wrapper {
+    display: flex; /* Always flex for its internal elements */
+    align-items: center;
+    /* This will be hidden by script.js when recording starts */
+}
+
+.input-wrapper.hidden-for-recording {
+    opacity: 0;
+    visibility: hidden;
+    height: 0; /* Collapse element when hidden */
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    pointer-events: none; /* Prevent interaction when hidden */
+}
+
 
 .microphone-icon {
-    color: var(--brand-yellow);
-    font-size: 1.2em;
-    margin-right: 10px;
+    color: var(--brand-yellow-dark);
+    font-size: 1.5em;
+    /* margin-right: 10px;  This margin is now on the chat-input-area gap */
     cursor: pointer;
+    transition: color 0.2s ease;
+    line-height: 1;
+    flex-shrink: 0; /* Prevent icon from shrinking */
 }
 
+.microphone-icon:hover {
+    color: var(--brand-yellow-dark);
+}
+
+.microphone-icon.recording {
+    color: red;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); opacity: 1; }
+    to { transform: scale(1.1); opacity: 0.7; }
+}
+
+/* Styles for Audio Recording Display */
+.audio-recording-display {
+    display: flex; /* Always flex for its internal elements */
+    align-items: center;
+    justify-content: space-between; /* This will push elements apart, for timer/waveform and send button */
+    color: var(--text-light);
+    font-size: 0.9em;
+    gap: 10px; /* Space between timer, waveform, and send button */
+    /* This will be shown by script.js when recording */
+    opacity: 0;
+    visibility: hidden;
+    height: 0; /* Start collapsed */
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    pointer-events: none; /* Prevent interaction when hidden */
+    transition: opacity 0.3s ease-in-out, visibility 0s 0.3s, height 0.3s ease-in-out, padding 0.3s ease-in-out, margin 0.3s ease-in-out;
+}
+
+.audio-recording-display.visible {
+    opacity: 1;
+    visibility: visible;
+    height: auto; /* Allow content to dictate height */
+    padding-top: 8px; /* Restore padding */
+    padding-bottom: 8px; /* Restore padding */
+    pointer-events: auto; /* Allow interaction when visible */
+}
+
+#recordingTimer {
+    font-weight: 500;
+    color: var(--brand-yellow);
+    width: 40px; /* Fixed width to prevent jumping */
+    text-align: left;
+    flex-shrink: 0;
+}
+
+.waveform-placeholder {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 20px;
+    overflow: hidden;
+    flex-grow: 1; /* Allow waveform to take available space */
+    justify-content: center; /* Center bars horizontally */
+}
+
+.waveform-bar {
+    width: 4px;
+    background-color: var(--text-secondary);
+    border-radius: 2px;
+    animation: wave-pulse 1s infinite alternate ease-in-out;
+    transform-origin: bottom;
+}
+
+.waveform-bar.bar-1 { animation-delay: 0s; height: 10px; }
+.waveform-bar.bar-2 { animation-delay: 0.1s; height: 15px; }
+.waveform-bar.bar-3 { animation-delay: 0.2s; height: 20px; }
+.waveform-bar.bar-4 { animation-delay: 0.3s; height: 15px; }
+.waveform-bar.bar-5 { animation-delay: 0.4s; height: 10px; }
+
+
+@keyframes wave-pulse {
+    0% { transform: scaleY(0.5); opacity: 0.7; }
+    50% { transform: scaleY(1); opacity: 1; }
+    100% { transform: scaleY(0.5); opacity: 0.7; }
+}
+
+
+/* Style for the audio player in chat messages */
+.user-message .message-content .audio-player,
+.bot-message .message-content .audio-player {
+    width: 100%;
+    margin-top: 8px;
+    background-color: var(--surface-dark);
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
+
+/* Further customize audio player controls if needed */
+.user-message .message-content audio::-webkit-media-controls-panel,
+.bot-message .message-content audio::-webkit-media-controls-panel {
+    background-color: var(--bubble-user);
+    color: var(--text-light);
+}
+
+.user-message .message-content audio::-webkit-media-controls-current-time-display,
+.bot-message .message-content audio::-webkit-media-controls-time-remaining-display {
+    color: var(--text-light);
+}
+
+.user-message .message-content audio::-webkit-media-controls-play-button,
+.user-message .message-content audio::-webkit-media-controls-mute-button,
+.user-message .message-content audio::-webkit-media-controls-volume-slider {
+    color: var(--text-light);
+}
+
+
 .message-input {
-    flex-grow: 1; /* Permite que o input ocupe o máximo de espaço */
+    flex-grow: 1;
     border: none;
     background: transparent;
     color: var(--text-light);
     font-size: 1em;
-    outline: none; /* Remove o contorno ao focar */
-    padding: 5px 0; /* Ajusta o padding interno */
+    outline: none;
+    padding: 0;
 }
 
 .message-input::placeholder {
-    color: var(--text-secondary); /* Cor do placeholder */
+    color: var(--text-secondary);
     opacity: 0.7;
 }
 
@@ -218,7 +351,7 @@ body {
     background-color: var(--brand-yellow);
     color: var(--surface-dark);
     border: none;
-    border-radius: 50%; /* Botão circular */
+    border-radius: 50%;
     width: 38px;
     height: 38px;
     display: flex;
@@ -226,8 +359,8 @@ body {
     align-items: center;
     font-size: 1.1em;
     cursor: pointer;
-    margin-left: 10px;
-    transition: background-color 0.2s ease; /* Transição suave no hover */
+    margin-left: 10px; /* Keep margin for spacing */
+    transition: background-color 0.2s ease;
 }
 
 .send-button:hover {
@@ -251,11 +384,17 @@ body {
 /* Mídias Queries para responsividade */
 @media (max-width: 600px) {
     .chat-container {
-        width: 100vw; /* Ocupa a largura total da tela em dispositivos menores */
-        height: 100vh; /* Ocupa a altura total da tela em dispositivos menores */
-        max-width: none; /* Remove a largura máxima */
-        max-height: none; /* Remove a altura máxima */
-        border-radius: 0; /* Remove bordas arredondadas para cobrir a tela toda */
-        box-shadow: none; /* Remove sombra */
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        max-height: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .chat-input-area {
+        padding: 15px;
+    }
+    .input-wrapper, .audio-recording-display {
+        padding: 8px 10px;
     }
 }

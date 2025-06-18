@@ -1,5 +1,5 @@
 // === Smooth Scrolling ===
-document.querySelectorAll("a[href^=\"#\"]").forEach(anchor => {
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener("click", function (e) {
         e.preventDefault();
         const targetId = this.getAttribute("href");
@@ -12,7 +12,7 @@ document.querySelectorAll("a[href^=\"#\"]").forEach(anchor => {
 
 // === Header Scroll Effect ===
 const header = document.querySelector(".header");
-if (header) { // Adicionado verificação para garantir que o header existe
+if (header) {
     window.addEventListener("scroll", () => {
         if (window.scrollY > 50) {
             header.classList.add("scrolled");
@@ -25,203 +25,45 @@ if (header) { // Adicionado verificação para garantir que o header existe
 
 // === Active Nav Link on Scroll ===
 const sections = document.querySelectorAll("section[id]");
-const navLinks = document.querySelectorAll(".nav-links a"); // Declaração aqui para ser global
+const navLinks = document.querySelectorAll(".nav-list1 a");
 
-if (sections.length > 0 && navLinks.length > 0) { // Verifica se há seções e links
+if (sections.length > 0 && navLinks.length > 0) {
     window.addEventListener("scroll", () => {
         let current = "";
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            // Ajuste offset conforme necessário, por exemplo, com base na altura do header
-            // Considera a altura do header fixo para uma detecção mais precisa
             const headerHeight = header ? header.offsetHeight : 0;
-            if (pageYOffset >= (sectionTop - headerHeight - 30)) { // Adicionado um offset de 30px
+            if (pageYOffset >= (sectionTop - headerHeight - 30)) {
                 current = section.getAttribute("id");
             }
         });
 
-        navLinks.forEach(link => {
+        document.querySelectorAll(".nav-list1 a, .nav-list a").forEach(link => {
             link.classList.remove("active");
             if (link.getAttribute("href").includes(current)) {
                 link.classList.add("active");
             }
         });
-        // Garante que 'home' esteja ativo se estiver no topo da página
-        // Verifica se scrollY está próximo do topo e se não há seção 'current' ativa
         if (window.pageYOffset < (sections[0].offsetTop - (header ? header.offsetHeight : 0) / 2) && current === "") {
-             navLinks.forEach(link => link.classList.remove("active"));
-             const homeLink = document.querySelector(".nav-links a[href=\"#home\"]");
+             document.querySelectorAll(".nav-list1 a, .nav-list a").forEach(link => link.classList.remove("active"));
+             const homeLink = document.querySelector('.nav-list1 a[href="#home"]');
              if (homeLink) homeLink.classList.add("active");
         }
     });
 }
 
-
 // === Form Validation === (Basic Example)
 const contactForm = document.querySelector(".contact-form form");
 if (contactForm) {
     contactForm.addEventListener("submit", (e) => {
-        // Basic validation can be added here
-        // e.preventDefault(); // Uncomment to prevent actual submission for testing
         console.log("Form submitted (or would be)");
-        // Add more robust validation logic if needed
     });
 }
 
-
-// ... (Mantenha todo o seu código anterior: Smooth Scrolling, Header Scroll Effect, Active Nav Link on Scroll, Form Validation) ...
-
-// === Mobile Menu Toggle ===
-const navToggle = document.querySelector(".nav-toggle"); // Seleciona o novo botão de toggle
-const navList = document.querySelector(".nav-list");     // Seleciona a nova lista de navegação
-
-if (navToggle && navList) {
-    navToggle.addEventListener("click", () => {
-        navList.classList.toggle("active");      // Alterna a classe 'active' na lista
-        navToggle.classList.toggle("active");    // Alterna a classe 'active' no botão para a animação do hambúrguer
-        
-        // Ajuste aria-expanded para acessibilidade
-        const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-        navToggle.setAttribute('aria-expanded', !isExpanded);
-    });
-
-    // Fechar menu quando um link é clicado (para navegação suave)
-    // Garante que o menu feche ao clicar em um item da lista
-    navList.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            if (navList.classList.contains('active')) {
-                navList.classList.remove('active');
-                navToggle.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-    });
-}
-
-// ... (Mantenha todo o seu código posterior: Particle Animation, showToast, DOMContentLoaded) ...
-
-
-// === Particle Animation (Step 6) ===
-// Using particles.js library
-// Mover a função showToast e o listener DOMContentLoaded para fora do bloco particlesJS
-// para garantir que estejam sempre disponíveis.
-
-// Check if particlesJS is loaded
-if (typeof particlesJS !== "undefined") {
-    particlesJS("particles-js", {
-        "particles": {
-            "number": {
-                "value": 40, // Adjusted number of particles
-                "density": {
-                    "enable": true,
-                    "value_area": 800
-                }
-            },
-            "color": {
-                "value": "#00f0c0" // Accent color (teal)
-            },
-            "shape": {
-                "type": "circle",
-                "stroke": {
-                    "width": 0,
-                    "color": "#000000"
-                },
-                "polygon": {
-                    "nb_sides": 5
-                }
-            },
-            "opacity": {
-                "value": 0.5,
-                "random": true, // Make opacity random
-                "anim": {
-                    "enable": true,
-                    "speed": 0.5,
-                    "opacity_min": 0.1,
-                    "sync": false
-                }
-            },
-            "size": {
-                "value": 3,
-                "random": true,
-                "anim": {
-                    "enable": false,
-                    "speed": 40,
-                    "size_min": 0.1,
-                    "sync": false
-                }
-            },
-            "line_linked": {
-                "enable": true,
-                "distance": 150,
-                "color": "#00f0c0", // Accent color for lines
-                "opacity": 0.4,
-                "width": 1
-            },
-            "move": {
-                "enable": true,
-                "speed": 1, // Slightly faster movement
-                "direction": "none",
-                "random": true, // Random direction
-                "straight": false,
-                "out_mode": "out",
-                "bounce": false,
-                "attract": {
-                    "enable": false,
-                    "rotateX": 600,
-                    "rotateY": 1200
-                }
-            }
-        },
-        "interactivity": {
-            "detect_on": "canvas",
-            "events": {
-                "onhover": {
-                    "enable": true,
-                    "mode": "grab" // Grab effect on hover
-                },
-                "onclick": {
-                    "enable": true,
-                    "mode": "push" // Push particles on click
-                },
-                "resize": true
-            },
-            "modes": {
-                "grab": {
-                    "distance": 140,
-                    "line_linked": {
-                        "opacity": 1
-                    }
-                },
-                "bubble": {
-                    "distance": 400,
-                    "size": 40,
-                    "duration": 2,
-                    "opacity": 8,
-                    "speed": 3
-                },
-                "repulse": {
-                    "distance": 200,
-                    "duration": 0.4
-                },
-                "push": {
-                    "particles_nb": 4
-                },
-                "remove": {
-                    "particles_nb": 2
-                }
-            }
-        },
-        "retina_detect": true
-    });
-} else {
-    console.error("particles.js not loaded");
-}
-
-// Mover essas funções para fora do bloco particlesJS
 function showToast(message, type = "success") {
     const toastContainer = document.getElementById("toast-container");
-    if (!toastContainer) { // Adiciona uma verificação para o container do toast
+    if (!toastContainer) {
         console.warn("Toast container not found.");
         return;
     }
@@ -233,10 +75,156 @@ function showToast(message, type = "success") {
 
     setTimeout(() => {
         toast.remove();
-    }, 6000); // 4 segundos
+    }, 6000);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    
+    // === Mobile Navigation Toggle (CORREÇÃO) ===
+    const navToggle = document.querySelector('.nav-toggle');
+    const navList = document.querySelector('.nav-list');
+
+    if (navToggle && navList) {
+        navToggle.addEventListener('click', () => {
+            // Alterna a classe 'active' no botão e na lista do menu
+            navToggle.classList.toggle('active');
+            navList.classList.toggle('active');
+
+            // Impede a rolagem do corpo da página quando o menu está aberto
+            if (navList.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Fecha o menu quando um dos links é clicado
+        document.querySelectorAll('.nav-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navToggle.classList.contains('active')) {
+                    navToggle.classList.remove('active');
+                    navList.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    }
+    // === FIM DA CORREÇÃO ===
+
+    // === Particle Animation (MOVED HERE TO ENSURE DOM IS READY) ===
+    // Using particles.js library
+    if (typeof particlesJS !== "undefined") {
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 40, 
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#00f0c0" 
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true, 
+                    "anim": {
+                        "enable": true,
+                        "speed": 0.5,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00f0c0", 
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1, 
+                    "direction": "none",
+                    "random": true, 
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab" 
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push" 
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    } else {
+        console.error("particles.js not loaded or 'particlesJS' function not found.");
+    }
+    // === End Particle Animation ===
+
+
     const btnTecnologias = document.getElementById("btn-tecnologias");
     const modal = document.getElementById("modal-tecnologias");
     const closeBtn = modal?.querySelector(".close-button");
@@ -256,51 +244,24 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
-});
 
-  document.addEventListener('DOMContentLoaded', () => {
-    // Remove URL hash para evitar rolagem direta para uma seção
     if (window.location.hash) {
       history.replaceState('', document.title, window.location.pathname + window.location.search);
     }
-
-    // Garante que a página comece no topo
     window.scrollTo(0, 0);
-
-    // Opcional: Adicione um pequeno atraso para garantir que execute após toda a renderização
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, 100);
 
-    // Função showToast
-    function showToast(message, type = "info") {
-      const container = document.getElementById("toast-container");
-      if (!container) {
-        console.warn("Toast container não encontrado.");
-        return;
-      }
-      const toast = document.createElement("div");
-      toast.className = `toast ${type}`;
-      toast.textContent = message;
-      container.appendChild(toast);
-      setTimeout(() => {
-        if (toast.parentNode === container) {
-          container.removeChild(toast);
-        }
-      }, 6000);
-    }
-
-    // --- LÓGICA DO FORMULÁRIO SUPABASE ---
     const supabaseUrl = "https://ojblhyflwcsckteiypje.supabase.co";
     const supabaseKey =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9qYmxoeWZsd2NzY2t0ZWl5cGplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0NTg4NjEsImV4cCI6MjA2MTAzNDg2MX0.-WSO_IgaXW81u8aqtJbRiLky40rFGpgAsRwArAcIU4M";
     const form = document.querySelector(".contact-form form");
-    let supabaseClient; // Declare supabaseClient outside the if block
+    let supabaseClient;
 
-    // Verifica se a biblioteca Supabase está carregada
     if (typeof supabase !== 'undefined' && supabase) {
       try {
-        const { createClient } = supabase; // Destrutura createClient do objeto global supabase
+        const { createClient } = supabase;
         if (typeof createClient === 'function') {
           supabaseClient = createClient(supabaseUrl, supabaseKey);
         } else {
@@ -314,7 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (form) {
-      if (supabaseClient) { // Procede apenas se o supabaseClient foi inicializado
+      if (supabaseClient) {
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
           const name = form.name.value.trim();
@@ -331,12 +292,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if (typeof showToast === "function") showToast("Por favor, insira um número de WhatsApp válido.", "error");
             else console.error("Função showToast não definida.");
             return;
-          }
+            }
           try {
             const { data, error } = await supabaseClient
               .from("contatos")
               .insert([{ name, email, whatsapp, message, processado: false }])
-              .select(); // Adicionado .select() para melhor feedback/manejo de erro
+              .select();
 
             if (error) {
               const errorMessage = error.message || "Ocorreu um erro ao enviar sua mensagem. Tente novamente.";
@@ -354,7 +315,6 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       } else {
-        // Supabase client não pôde ser inicializado, desabilita o formulário
         console.warn("Supabase client não inicializado. O formulário de contato será desabilitado.");
         const submitButton = form.querySelector('button[type="submit"]');
         if (submitButton) {
@@ -367,17 +327,28 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     }
-    // --- FIM DA LÓGICA DO FORMULÁRIO SUPABASE ---
-
 
     // --- LÓGICA DO CHATBOT EMBUTIDO ---
     const chatMessagesContainer = document.getElementById('chatMessages');
     const chatInput = document.getElementById('chatInput');
-    const sendChatBtn = document.getElementById('sendChatBtn');
+    const sendChatBtn = document.getElementById('sendChatBtn'); 
+    const recordAudioBtn = document.getElementById('recordAudioBtn'); 
+    const audioRecordingDisplay = document.getElementById('audioRecordingDisplay');
+    const recordingTimer = document.getElementById('recordingTimer');
+    const sendAudioBtn = document.getElementById('sendAudioBtn'); 
+    const inputWrapper = document.querySelector('.chat-input-area .input-wrapper'); 
+
     let chatHistory = [];
     const N8N_WEBHOOK_URL = "https://n8n.maia-ia.sbs/webhook/8449b14a-b5eb-4aeb-a09c-96d95f18dd52";
     const SESSION_ID_KEY = 'maiaChatSessionId';
     let currentSessionId = localStorage.getItem(SESSION_ID_KEY);
+
+    let mediaRecorder;
+    let audioChunks = [];
+    let isRecording = false;
+    let timerInterval;
+    let secondsRecorded = 0;
+    let recordedAudioBlob = null; 
 
     if (!currentSessionId) {
       if (typeof crypto !== 'undefined' && crypto.randomUUID) {
@@ -393,53 +364,131 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
-    async function addMessageToChat(text, sender) {
+    async function addMessageToChat(text, sender, audioBlobUrl = null) {
       const messageDiv = document.createElement('div');
       messageDiv.classList.add('message', sender);
-      const messageTextDiv = document.createElement('div');
-      messageTextDiv.classList.add('message-text');
+      const messageContentDiv = document.createElement('div');
+      messageContentDiv.classList.add('message-content');
 
       if (sender === 'bot') {
         const botAvatar = document.createElement('div');
         botAvatar.classList.add('bot-avatar');
         botAvatar.textContent = 'IA';
-        const messageContentDiv = document.createElement('div');
-        messageContentDiv.classList.add('message-content');
+        const messageTextDiv = document.createElement('div');
+        messageTextDiv.classList.add('message-text');
+        
         messageContentDiv.appendChild(botAvatar);
         messageContentDiv.appendChild(messageTextDiv);
         messageDiv.appendChild(messageContentDiv);
-      } else {
-        messageTextDiv.textContent = text; // Usuário não tem digitação caractere por caractere
-        messageDiv.appendChild(messageTextDiv);
-      }
 
-      if (chatMessagesContainer) {
-        chatMessagesContainer.appendChild(messageDiv);
-        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
-      }
+        if (chatMessagesContainer) {
+            chatMessagesContainer.appendChild(messageDiv);
+            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+        }
 
-      if (sender === 'bot') {
         for (let i = 0; i < text.length; i++) {
           messageTextDiv.textContent += text.charAt(i);
           if (chatMessagesContainer) chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
           await delay(30);
         }
+      } else { // User message
+        const messageTextDiv = document.createElement('div');
+        messageTextDiv.classList.add('message-text');
+        messageTextDiv.textContent = text;
+        messageContentDiv.appendChild(messageTextDiv);
+
+        if (audioBlobUrl) {
+            const audioPlayer = document.createElement('audio');
+            audioPlayer.controls = true;
+            audioPlayer.src = audioBlobUrl;
+            audioPlayer.classList.add('audio-player');
+            messageContentDiv.appendChild(audioPlayer);
+        }
+        messageDiv.appendChild(messageContentDiv);
+        if (chatMessagesContainer) {
+            chatMessagesContainer.appendChild(messageDiv);
+            chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+        }
       }
     }
 
-    function disableChatInput() {
-      if (chatInput) chatInput.disabled = true;
-      if (sendChatBtn) sendChatBtn.disabled = true;
+    // Consolidated function to manage the visibility of input elements
+    function setInputMode(mode) {
+        if (mode === 'text') {
+            // SHOW text input elements
+            if (inputWrapper) {
+                inputWrapper.style.display = 'flex'; 
+                inputWrapper.classList.remove('hidden-for-recording');
+            }
+            // HIDE audio recording display
+            if (audioRecordingDisplay) {
+                audioRecordingDisplay.style.display = 'none';
+                audioRecordingDisplay.classList.remove('visible');
+            }
+            // Enable text input
+            if (chatInput) {
+                chatInput.disabled = false;
+                chatInput.value = ''; 
+            }
+            // Enable send text button
+            if (sendChatBtn) {
+                sendChatBtn.disabled = false;
+                sendChatBtn.style.display = 'flex'; 
+            }
+            // Ensure recordAudioBtn is enabled and shows mic icon
+            if (recordAudioBtn) {
+                recordAudioBtn.disabled = false;
+                recordAudioBtn.classList.remove('recording');
+                recordAudioBtn.innerHTML = '<i class="material-icons">mic</i>'; 
+            }
+            // Hide and disable sendAudioBtn
+            if (sendAudioBtn) { 
+                sendAudioBtn.disabled = true;
+                sendAudioBtn.style.display = 'none';
+            }
+            recordedAudioBlob = null; 
+        } else if (mode === 'recording') {
+            // HIDE text input elements
+            if (inputWrapper) {
+                inputWrapper.style.display = 'none';
+                inputWrapper.classList.add('hidden-for-recording');
+            }
+            // SHOW audio recording display
+            if (audioRecordingDisplay) {
+                audioRecordingDisplay.style.display = 'flex';
+                audioRecordingDisplay.classList.add('visible');
+            }
+            // Disable text input (to prevent typing while recording)
+            if (chatInput) chatInput.disabled = true;
+            
+            // Microphone button remains enabled and shows 'stop' icon
+            if (recordAudioBtn) recordAudioBtn.disabled = false;
+
+            // Enable sendAudioBtn (the airplane button on the audio display)
+            if (sendAudioBtn) {
+                sendAudioBtn.disabled = false;
+                sendAudioBtn.style.display = 'flex'; 
+            }
+            // Disable sendChatBtn (the text send button, as it's hidden anyway)
+            if (sendChatBtn) sendChatBtn.disabled = true;
+
+        } else if (mode === 'processing') { // When bot is thinking/responding
+            // Keep current display state but disable all interactive elements
+            if (chatInput) chatInput.disabled = true;
+            if (sendChatBtn) sendChatBtn.disabled = true; 
+            if (recordAudioBtn) recordAudioBtn.disabled = true; 
+            if (sendAudioBtn) sendAudioBtn.disabled = true; 
+        }
     }
 
-    function enableChatInput() {
-      if (chatInput) chatInput.disabled = false;
-      if (sendChatBtn) sendChatBtn.disabled = false;
-    }
 
     function addUserMessage(text) {
-      addMessageToChat(text, 'user'); // Não precisa de await aqui pois não tem delay
+      addMessageToChat(text, 'user');
       chatHistory.push({ role: "user", parts: [{ text: text }] });
+    }
+
+    function addUserAudioMessage(audioBlobUrl) {
+        addMessageToChat("", "user", audioBlobUrl);
     }
 
     async function addBotMessage(text) {
@@ -476,21 +525,35 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    async function getBotResponse(userMessage) {
-      disableChatInput();
+    async function getBotResponse(userMessage, audioBlob = null) {
+      setInputMode('processing'); 
       showTypingIndicator();
-      const payload = { userMessage: userMessage, sessionId: currentSessionId };
+      let payload;
+
+      if (audioBlob) {
+        const formData = new FormData();
+        formData.append('audio', audioBlob, 'audio.webm');
+        formData.append('sessionId', currentSessionId);
+        payload = formData;
+      } else {
+        payload = JSON.stringify({ userMessage: userMessage, sessionId: currentSessionId });
+      }
 
       try {
-        const response = await fetch(N8N_WEBHOOK_URL, {
+        const fetchOptions = {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+          body: payload,
+        };
+
+        if (!audioBlob) {
+          fetchOptions.headers = { 'Content-Type': 'application/json' };
+        }
+        
+        const response = await fetch(N8N_WEBHOOK_URL, fetchOptions);
 
         if (!response.ok) {
-          const errorData = await response.json();
-          console.error('Erro do Webhook n8n:', errorData);
+          const errorText = await response.text();
+          console.error('Erro do Webhook n8n:', response.status, response.statusText, errorText);
           throw new Error(`Webhook Error: ${response.status} ${response.statusText}`);
         }
 
@@ -521,56 +584,143 @@ document.addEventListener("DOMContentLoaded", () => {
         removeTypingIndicator();
         await addBotMessage("Ops! Algo deu errado. Tente novamente mais tarde.");
       } finally {
-        enableChatInput();
+        setInputMode('text'); 
       }
     }
 
-    async function handleSendMessage() {
-      if (!chatInput) return;
-      const messageText = chatInput.value.trim();
-      if (messageText) {
-        addUserMessage(messageText);
-        chatInput.value = '';
-        await getBotResponse(messageText);
-      }
+    async function handleSendTextMessage() {
+        if (chatInput) {
+            const messageText = chatInput.value.trim();
+            if (messageText) {
+                addUserMessage(messageText);
+                chatInput.value = '';
+                await getBotResponse(messageText);
+            }
+        }
     }
 
-    
+    async function handleSendRecordedAudio() {
+        if (recordedAudioBlob) {
+            showToast("Enviando áudio...", "info");
+            const tempBlob = recordedAudioBlob; 
+            
+            if (isRecording && mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop(); 
+            }
+            
+            await getBotResponse(null, tempBlob);
+        } else {
+            showToast("Nenhum áudio para enviar.", "error");
+            setInputMode('text'); 
+        }
+    }
 
-     
-    // --- FIM DO CÓDIGO PARA MOSTRAR FOOTER ---
+    // --- AUDIO RECORDING LOGIC ---
+    function formatTime(seconds) {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
 
+    if (recordAudioBtn) {
+        recordAudioBtn.addEventListener('click', async () => {
+            if (!isRecording) {
+                // Iniciar gravação
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+                    secondsRecorded = 0;
+                    recordingTimer.textContent = formatTime(secondsRecorded);
+                    recordedAudioBlob = null; 
+                    
+                    // Transição para o modo de gravação
+                    setInputMode('recording'); 
 
-    // Lógica inicial do chat
-    if (chatMessagesContainer && chatMessagesContainer.children.length === 0) {
-      (async () => {
-        await addBotMessage("Olá! Sou a MaIA, sua assistente virtual. Como posso te ajudar hoje?");
-        enableChatInput();
-        // Não é recomendado focar automaticamente em campos de texto em todas as situações
-        // if (document.activeElement !== chatInput && chatInput) {
-        // chatInput.focus();
-        // }
-      })();
-    } else {
-      enableChatInput();
+                    timerInterval = setInterval(() => {
+                        secondsRecorded++;
+                        recordingTimer.textContent = formatTime(secondsRecorded);
+                    }, 1000);
+
+                    mediaRecorder.ondataavailable = event => {
+                        audioChunks.push(event.data);
+                    };
+
+                    mediaRecorder.onstop = async () => {
+                        clearInterval(timerInterval); 
+                        isRecording = false; 
+
+                        // Esta função é chamada quando a gravação é parada.
+                        // Agora, ela deve sempre processar e enviar o áudio se houver chunks.
+                        // O `recordAudioBtn` com ícone "stop" dispara `mediaRecorder.stop()`,
+                        // que por sua vez vem para cá.
+                        
+                        if (audioChunks.length > 0) {
+                            const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                            recordedAudioBlob = audioBlob; 
+                            const audioBlobUrl = URL.createObjectURL(audioBlob);
+                            addUserAudioMessage(audioBlobUrl); 
+
+                            showToast("Gravação finalizada. Enviando áudio...", "info");
+                            await getBotResponse(null, recordedAudioBlob); // ENVIA O ÁUDIO E RESETA A INTERFACE
+                        } else {
+                             showToast("Gravação muito curta ou sem áudio.", "info");
+                             setInputMode('text'); 
+                        }
+                    };
+
+                    mediaRecorder.start();
+                    isRecording = true;
+                    recordAudioBtn.classList.add('recording');
+                    recordAudioBtn.innerHTML = '<i class="material-icons">stop</i>'; 
+                    
+                    showToast("Gravação iniciada...", "info");
+
+                } catch (err) {
+                    console.error('Erro ao acessar o microfone:', err);
+                    showToast("Não foi possível acessar o microfone. Verifique as permissões.", "error");
+                    setInputMode('text'); 
+                    clearInterval(timerInterval);
+                }
+            } else {
+                // Usuário clicou no botão de stop (microfone vermelho).
+                // Isso deve parar a gravação e disparar o envio através de mediaRecorder.onstop().
+                mediaRecorder.stop();
+            }
+        });
     }
 
     if (sendChatBtn) {
-      sendChatBtn.addEventListener('click', handleSendMessage);
+        sendChatBtn.addEventListener('click', handleSendTextMessage);
     }
+    
+    // sendAudioBtn AGORA TEM UM COMPORTAMENTO CLARO: Enviar o áudio
+    // se estiver no display de gravação.
+    if (sendAudioBtn) {
+        sendAudioBtn.addEventListener('click', handleSendRecordedAudio);
+    }
+
     if (chatInput) {
       chatInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' && !chatInput.disabled) {
           e.preventDefault();
-          handleSendMessage();
+          handleSendTextMessage(); 
         }
       });
     }
-  });
-  document.addEventListener('DOMContentLoaded', () => {
-    // Código existente do chatbot e outros se houver...
 
-    // Lógica para o Acordeão (FAQ)
+    // Initial chat logic on load
+    if (chatMessagesContainer && chatMessagesContainer.children.length === 0) {
+      (async () => {
+        await addBotMessage("Olá! Sou a MaIA, sua assistente virtual. Como posso te ajudar hoje?");
+        setInputMode('text'); 
+      })();
+    } else {
+      setInputMode('text'); 
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
     const accordionHeaders = document.querySelectorAll('.accordion-header');
 
     accordionHeaders.forEach(header => {
@@ -578,28 +728,20 @@ document.addEventListener("DOMContentLoaded", () => {
             const accordionItem = header.closest('.accordion-item');
             const accordionContent = accordionItem.querySelector('.accordion-content');
 
-            // Fecha outros itens abertos
             document.querySelectorAll('.accordion-item.active').forEach(item => {
-                if (item !== accordionItem) { // Se não for o item clicado
+                if (item !== accordionItem) {
                     item.classList.remove('active');
                     item.querySelector('.accordion-content').style.maxHeight = 0;
                 }
             });
 
-            // Alterna a classe 'active' no item clicado
             accordionItem.classList.toggle('active');
 
-            // Ajusta a altura do conteúdo para expandir/recolher
             if (accordionItem.classList.contains('active')) {
-                // Define a altura máxima para o scrollHeight do conteúdo
-                // Isso permite que o conteúdo se expanda dinamicamente
                 accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
             } else {
                 accordionContent.style.maxHeight = 0;
             }
         });
     });
-
-    // Você também pode adicionar o código JavaScript para o carrossel de tags aqui,
-    // se precisar de controle mais dinâmico ou se a solução CSS não for suficiente.
 });

@@ -260,7 +260,7 @@ section {
   color: var(--accent-color); /* Usando a cor de destaque principal */
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  background-color: rgba(var(--accent-color-rgb), 0.1); /* Um fundo sutil */
+  background-color: rgba(var(--accent-color)), 0.1; /* Um fundo sutil */
   border: 1px solid rgba(var(--accent-color-rgb), 0.3);
   border-radius: 8px;
   margin-bottom: 1.5rem;
@@ -1427,6 +1427,8 @@ section {
     }
 
     .hero-tag-accent {
+      align-items: center;
+      justify-content: center;
       padding: 5px 10px;
       font-size: 0.7rem;
       margin-bottom: 1rem;
@@ -1747,17 +1749,15 @@ section {
          margin-left: 15px;
     margin-right: 15px;
   }
-  .our-dream-content h2 {
-    font-size: 2rem;
+.our-dream-content h2 {
+    font-size: 1.8rem;
+    text-align: center; /* Este já está centralizando o H2 */
   }
   .our-dream-content p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    text-align: center; /* Este já está centralizando o P */
   }
-  .our-dream-tag {
-    font-size: 0.7rem;
-    padding: 6px 12px;
-    margin-bottom: 1rem;
-  }
+ 
   .our-dream-buttons .btn-secondary {
     padding: 0.8rem 1.8rem;
     font-size: 0.9rem;
@@ -1784,10 +1784,10 @@ section {
     text-align: center;
   }
   .our-dream-tag {
-    margin: 0 auto 1rem auto; /* Centraliza a tag */
-    display: block; /* Garante que a tag seja um bloco para centralizar */
-    width: fit-content; /* Ajusta a largura ao conteúdo para centralização */
-  }
+  margin: 0 auto 1rem auto; /* Centraliza a tag */
+  display: block; /* Garante que a tag seja um bloco para centralizar */
+  width: fit-content; /* Ajusta a largura ao conteúdo para centralização */
+}
   .our-dream-buttons {
     display: flex;
     justify-content: center; /* Centraliza o botão */
@@ -2082,7 +2082,7 @@ section {
 .tech-tags-wrapper {
   display: flex; /* Coloca os grids lado a lado */
   width: max-content; /* Permite que o wrapper tenha largura total dos grids */
-  animation: scrollTags 30s linear infinite; /* Animação principal */
+  animation: scrollTags 60s linear infinite; /* Animação principal */
 }
 
 .tech-tags-wrapper:hover {
@@ -2202,7 +2202,7 @@ section {
   }
   /* Ajuste a velocidade da animação em telas menores, se necessário */
   .tech-tags-wrapper {
-    animation-duration: 25s; /* Um pouco mais rápido */
+    animation-duration: 50s; /* Um pouco mais rápido */
   }
 }
 
@@ -2219,7 +2219,7 @@ section {
     border-radius: 6px;
   }
   .tech-tags-wrapper {
-    animation-duration: 20s; /* Mais rápido */
+    animation-duration: 50s; /* Mais rápido */
   }
 }
 
@@ -2236,7 +2236,7 @@ section {
     border-radius: 5px;
   }
   .tech-tags-wrapper {
-    animation-duration: 15s; /* Ainda mais rápido */
+    animation-duration: 50s; /* Ainda mais rápido */
   }
 }
 /* === SEÇÃO DE PROCESSO === */
@@ -2287,6 +2287,7 @@ section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  
   justify-content: center;
   align-items: start; /* Alinha os cards pelo topo */
 }
@@ -2307,6 +2308,8 @@ section {
   align-items: center;
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .process-step-card:hover {
@@ -2465,6 +2468,8 @@ section {
     rgba(var(--accent-color-rgb), 0.03), /* Levemente mais sutil */
     rgba(var(--card-bg-color), 0.4) /* Fundo um pouco mais transparente */
   );
+  margin-left: 15px;
+  margin-right: 15px;
   backdrop-filter: blur(5px);
   border-radius: 15px;
   padding: 3.5rem;
@@ -2854,6 +2859,8 @@ section {
   margin-bottom: 1rem; /* Espaçamento entre os itens do acordeão */
   overflow: hidden; /* Garante que o conteúdo seja cortado */
   transition: all 0.3s ease;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .accordion-item:last-child {
@@ -3027,7 +3034,7 @@ section {
 }
 /* === RODAPÉ PRINCIPAL === */
 #main-footer {
-  background-color: #000; /* Fundo preto puro para o rodapé */
+  border: 1px solid rgba(var(--accent-color-rgb), 0.1);
   padding: 80px 0 0 0; /* Padding superior, sem padding inferior no bloco principal */
   color: var(--secondary-text-color);
   font-size: 0.9rem;
@@ -3086,7 +3093,7 @@ section {
 .footer-newsletter .newsletter-form input {
   width: 100%;
   padding: 0.8rem 1rem;
-  background-color: #1a1a1a;
+
   border: 1px solid #333;
   border-radius: 8px;
   color: var(--primary-text-color);
@@ -3125,9 +3132,12 @@ section {
 
 /* Rodapé Inferior */
 .footer-bottom {
-  background-color: #0b0b0b; /* Cor ligeiramente mais escura para a parte inferior */
-  padding: 2rem 0;
-  border-top: 1px solid #1a1a1a; /* Linha divisória sutil */
+
+ background: linear-gradient(
+    145deg,
+    rgba(var(--accent-color-rgb), 0.05),
+    rgba(var(--card-bg-color), 0.5)
+  );
 }
 
 .footer-bottom-content {
@@ -3198,6 +3208,7 @@ section {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: none;
 }
 
 .whatsapp-float:hover {
@@ -3333,5 +3344,13 @@ section {
   .whatsapp-float img {
     width: 25px;
     height: 25px;
+  }
+  .tech-tags{
+    display: none;
+    visibility: hidden;
+  }
+  .tech-tags-wrapper{
+ display: none;
+    visibility: hidden;
   }
 }

@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="icon" href="images/favicon.png" type="image/x-icon" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="chat.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   </head>
   <body class="bg-slate-900 text-slate-200">
     <div id="particles-js"></div>
@@ -25,13 +27,19 @@
 
         <ul class="nav-list1 flex flex-col md:flex-row md:space-x-4">
           <li class="nav-item">
-            <a href="#home" class="nav-link active">Home</a>
+            <a href="#home" class="nav-link active">Início</a>
           </li>
           <li class="nav-item">
-            <a href="#about-us" class="nav-link">Sobre Nós</a>
+            <a href="#chatbot-section-nav" class="nav-link">Assistente</a>
           </li>
           <li class="nav-item">
-            <a href="#chatbot-section-nav" class="nav-link">Chatbot</a>
+            <a href="#our-dream" class="nav-link">Sobre Nós</a>
+          </li>
+          <li class="nav-item">
+            <a href="#services" class="nav-link">Produtos</a>
+          </li>
+          <li class="nav-item">
+            <a href="#faq-section" class="nav-link">Dúvidas</a>
           </li>
           <li class="nav-item">
             <a href="#contact" class="nav-link">Contato</a>
@@ -49,13 +57,16 @@
             <a href="#home" class="nav-link active">Home</a>
           </li>
           <li class="nav-item">
-            <a href="#about-us" class="nav-link">Sobre Nós</a>
+            <a href="#chatbot-section-nav" class="nav-link">Assistente</a>
           </li>
           <li class="nav-item">
-            <a href="#services" class="nav-link">Serviços</a>
+            <a href="#our-dream" class="nav-link">Sobre Nós</a>
           </li>
           <li class="nav-item">
-            <a href="#chatbot-section-nav" class="nav-link">Chatbot</a>
+            <a href="#services" class="nav-link">Produtos</a>
+          </li>
+          <li class="nav-item">
+            <a href="#faq-section" class="nav-link">Dúvidas </a>
           </li>
           <li class="nav-item">
             <a href="#contact" class="nav-link">Contato</a>
@@ -67,7 +78,7 @@
           </li>
           <li class="nav-item mobile-only-item social-icons-mobile">
             <a
-              href="#"
+              href="https://www.instagram.com/maia.inteligencia?igsh=c3VxZGtnMWYwcG96"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -75,7 +86,7 @@
             >
               <img src="images/instagram.png" alt="Instagram" />
             </a>
-            <a
+           <!-- <a
               href="#"
               target="_blank"
               rel="noopener noreferrer"
@@ -83,7 +94,7 @@
               title="X (Twitter)"
             >
               <img src="images/X.png" alt="X" />
-            </a>
+            </a>-->
             <a
               href="#"
               target="_blank"
@@ -99,7 +110,7 @@
         <div class="navbar-right">
           <div class="social-icons-header">
             <a
-              href="#"
+              href="https://www.instagram.com/maia.inteligencia?igsh=c3VxZGtnMWYwcG96"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
@@ -107,7 +118,7 @@
             >
               <img src="images/instagram.png" alt="Instagram" />
             </a>
-            <a
+          <!--<a
               href="#"
               target="_blank"
               rel="noopener noreferrer"
@@ -115,7 +126,7 @@
               title="X (Twitter)"
             >
               <img src="images/X.png" alt="X" />
-            </a>
+            </a>-->
             <a
               href="#"
               target="_blank"
@@ -140,9 +151,7 @@
               >Inteligência Artificial</span
             >
           </h1>
-          <div class="hero-tags-container">
-            <img src="images/tags.svg" alt="Tags MaIA" class="tags-img" />
-          </div>
+         
           <p>
             Potencializando a eficiência da sua equipe e reduzindo custos desnecessários. Nosso time implementa inteligência artificial nos setores
             estratégicos do seu negócio.
@@ -169,37 +178,51 @@
             />
           </div>
           <div id="chatMessages" class="chat-messages">
-            <!-- Mensagens do chat serão adicionadas aqui via JavaScript -->
-          </div>
+            </div>
           <div class="chat-input-area">
-            <input
-              type="text"
-              id="chatInput"
-              class="chat-input"
-              placeholder="Envie uma mensagem para MaIA..."
-            />
-            <button
-              id="sendChatBtn"
-              class="send-btn"
-              aria-label="Enviar mensagem"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-send-horizontal"
-              >
-                <path d="m3 3 3 9-3 9 19-9Z" />
-                <path d="M6 12h16" />
-              </svg>
+            <button id="recordAudioBtn" class="microphone-icon" aria-label="Gravar áudio">
+                <i class="material-icons">mic</i>
             </button>
-          </div>
+            <div class="input-wrapper">
+                <input
+                type="text"
+                id="chatInput"
+                class="message-input"
+                placeholder="Envie uma mensagem para MaIA..."
+                />
+                <button
+                id="sendChatBtn"
+                class="send-button"
+                aria-label="Enviar mensagem"
+                >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="lucide lucide-send-horizontal"
+                >
+                    <path d="m3 3 3 9-3 9 19-9Z" />
+                    <path d="M6 12h16" />
+                </svg>
+                </button>
+            </div>
+            <div id="audioRecordingDisplay" class="audio-recording-display hidden">
+                <span id="recordingTimer">0:00</span>
+                <div class="waveform-placeholder">
+                    <div class="waveform-bar bar-1"></div>
+                    <div class="waveform-bar bar-2"></div>
+                    <div class="waveform-bar bar-3"></div>
+                    <div class="waveform-bar bar-4"></div>
+                    <div class="waveform-bar bar-5"></div>
+                </div>
+                </div>
+            </div>
           <div class="chat-footer">
             O Agente de IA pode cometer erros. Considere verificar informações
             importantes.<br />
@@ -211,7 +234,7 @@
       <section id="our-dream" class="container">
         <div class="our-dream-wrapper">
           <div class="our-dream-content">
-            <span class="hero-tag-accent">Como vamos te ajudar</span>
+            <span class="our-dream-tag">Como vamos te ajudar</span>
             <h2>Reinventar o seu<br />negócio</h2>
             <p>
              Na MaIA, transformamos a maneira como sua empresa opera. Em vez de apenas falar em inovação, nós a aplicamos para:
@@ -291,7 +314,7 @@
              Tenha a visão completa da saúde financeira do seu negócio, impulsionada por insights inteligentes. Este agente analisa profundamente seus dados financeiros, desde o fluxo de caixa e despesas até a previsão de receitas e oportunidades de otimização. Transforme números brutos em estratégias lucrativas e tome decisões mais rápidas e seguras.
             </p>
             <a href="#contact" class="card-link"
-              >Conhecer assinatura <span class="arrow-icon">➔</span></a
+              >Quero conhecer<span class="arrow-icon">➔</span></a
             >
           </div>
 
@@ -304,7 +327,7 @@
              "Eleve sua eficiência e encante seus clientes. Este assistente inteligente automatiza agendamentos complexos e oferece um suporte ao cliente instantâneo e personalizado, 24/7. Libere sua equipe para focar no crescimento, não na rotina.
             </p>
             <a href="#contact" class="card-link"
-              >Conhecer assinatura <span class="arrow-icon">➔</span></a
+              >Quero conhecer <span class="arrow-icon">➔</span></a
             >
           </div>
 
@@ -317,7 +340,7 @@
               Otimize a gestão de talentos do início ao fim. Nosso agente automatiza a triagem de currículos, auxilia no processo de integração de novos funcionários e analisa o clima organizacional para reter os melhores talentos.
             </p>
             <a href="#contact" class="card-link"
-              >Conhecer assinatura <span class="arrow-icon">➔</span></a
+              >Quero conhecer<span class="arrow-icon">➔</span></a
             >
           </div>
 
@@ -330,7 +353,7 @@
               Garanta que seus projetos sejam entregues no prazo e dentro do orçamento. Nosso agente monitora o progresso em tempo real, aloca tarefas de forma inteligente, prevê possíveis gargalos e fornece relatórios claros de desempenho. Tenha o comando total para alcançar suas metas com precisão.
             </p>
             <a href="#contact" class="card-link"
-              >Conhecer assinatura <span class="arrow-icon">➔</span></a
+              >Quero conhecer<span class="arrow-icon">➔</span></a
             >
           </div>
         </div>
@@ -389,7 +412,6 @@
 
     <section id="tech-tags">
       <div class="tech-tags-wrapper">
-        <!-- Lista Original de Tags -->
         <div class="tech-tags-grid tech-tags-grid-original">
           <div class="tech-tag-item">Geração de Leads com IA</div>
           <div class="tech-tag-item">Personalização de Campanhas em Massa</div>
@@ -415,7 +437,6 @@
           <div class="tech-tag-item">Voz Sintética para Comunicação Corporativa</div>
         </div>
 
-        <!-- Cópia da Lista de Tags para Efeito de Loop -->
         <div class="tech-tags-grid tech-tags-grid-copy">
           <div class="tech-tag-item">Geração de Leads com IA</div>
           <div class="tech-tag-item">Personalização de Campanhas em Massa</div>
@@ -718,25 +739,15 @@
     </main>
  <footer id="main-footer">
       <div class="container footer-content">
-        <div class="footer-column">
-          <h4>Navegação</h4>
-          <ul>
-            <li><a href="#about-us">Sobre nós</a></li>
-            <li><a href="#contact">Agendar diagnóstico</a></li>
-            <li><a href="#">Vagas</a></li>
-            <li><a href="#">Newsletter</a></li>
-          </ul>
-        </div>
+      
 
         <div class="footer-column">
           <h4>Empresa</h4>
           <p>MaIA Inteligência Ltda</p>
-          <p>CNPJ 00.000.000/0000-00</p>
-          <p>Rua Exemplo, 123</p>
-          <p>Curitiba, PR, Brasil</p>
-          <a href="https://www.reclameaqui.com.br/" target="_blank" rel="noopener noreferrer">
-            <img src="images/reclame-aqui.png" alt="Verificada por Reclame Aqui" class="reclame-aqui-logo" />
-          </a>
+          <p>CNPJ 60.636.932/0001-57</p>
+          <p>Rua C-165, quadra 388, lote 1, Jardim América</p>
+          <p>Goiânia, Goiás</p>
+        
         </div>
 
         <div class="footer-column">
@@ -745,17 +756,7 @@
           <p>+55 (41) 98705-7817</p>
         </div>
 
-        <div class="footer-column footer-newsletter">
-          <h4>Quer receber nossas novidades diretamente no seu e-mail?</h4>
-          <div class="newsletter-form">
-            <input type="email" placeholder="Digite aqui o seu e-mail" aria-label="Seu e-mail para newsletter" />
-            <p class="privacy-text">
-              Ao me inscrever eu aceito os termos da <a href="#">Política de Privacidade</a> e
-              <a href="#">Termos de Uso</a> da MaIA.
-            </p>
-            <button class="btn btn-primary">Quero receber</button>
-          </div>
-        </div>
+       
       </div>
 
       <div class="footer-bottom">
@@ -770,18 +771,13 @@
             <a href="#">Política de Privacidade</a>
             <a href="#">Termos de Uso</a>
           </div>
-          <a href="#top" class="back-to-top" aria-label="Voltar para o topo">
+          <a href="#home" class="back-to-top" aria-label="Voltar para o topo">
             VOLTAR PARA O TOPO <span class="arrow-icon-up">↑</span>
           </a>
         </div>
       </div>
     </footer>
-
-    <a href="https://wa.me/5541987057817" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="WhatsApp">
-        <img src="https://cdn-icons-png.freepik.com/256/15707/15707917.png?semt=ais_hybrid" alt="WhatsApp Icon" />
-    </a>
-
-    <footer id="fixed-doubt-footer">
+<footer id="fixed-doubt-footer">
       <p>Dúvidas? <br /><strong>Converse com a MaIA!</strong></p>
       <button
         class="btn-maia-footer"
@@ -790,7 +786,12 @@
         Falar com a
         <img src="images/chat.png" alt="MaIA Logo" />
       </button>
-    </footer>
+      <div class="whatsapp-float-mobile">
+        <a href="https://wa.me/5541987057817" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="whatsapp-float">
+            <img src="https://cdn-icons-png.freepik.com/256/15707/15707917.png?semt=ais_hybrid" alt="WhatsApp Icon" />
+        </a>
+      </div>
+      </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
