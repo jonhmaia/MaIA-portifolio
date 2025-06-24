@@ -530,14 +530,21 @@ document.addEventListener("DOMContentLoaded", () => {
       showTypingIndicator();
       let payload;
 
+      // MODIFICAÇÃO INÍCIO
       if (audioBlob) {
         const formData = new FormData();
         formData.append('audio', audioBlob, 'audio.webm');
         formData.append('sessionId', currentSessionId);
+        formData.append('type', 'audio'); // Adiciona o tipo 'audio'
         payload = formData;
       } else {
-        payload = JSON.stringify({ userMessage: userMessage, sessionId: currentSessionId });
+        payload = JSON.stringify({ 
+            userMessage: userMessage, 
+            sessionId: currentSessionId,
+            type: 'message' // Adiciona o tipo 'message'
+        });
       }
+      // MODIFICAÇÃO FIM
 
       try {
         const fetchOptions = {
@@ -545,6 +552,8 @@ document.addEventListener("DOMContentLoaded", () => {
           body: payload,
         };
 
+        // Não defina Content-Type para FormData, o navegador faz isso automaticamente
+        // com o boundary correto.
         if (!audioBlob) {
           fetchOptions.headers = { 'Content-Type': 'application/json' };
         }
@@ -712,7 +721,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initial chat logic on load
     if (chatMessagesContainer && chatMessagesContainer.children.length === 0) {
       (async () => {
-        await addBotMessage("Olá! Sou a MaIA, sua assistente virtual. Como posso te ajudar hoje?");
+        await addBotMessage("Olá! Sou a MaIA, assistente virtual. Como posso te ajudar hoje?");
         setInputMode('text'); 
       })();
     } else {
